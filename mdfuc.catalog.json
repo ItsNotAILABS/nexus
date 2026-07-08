@@ -1,0 +1,46 @@
+{
+  "schema": "medina.mdfuc.catalog.v1",
+  "name": "Medina Development Federation Unified Catalog",
+  "authority": "ItsNotAILABS / Casa de Medina / NOVA",
+  "truth_line": "MDFUC tracks the repo family as one coordinated development organism, not scattered repositories.",
+  "active_repositories": [
+    {
+      "repo": "ItsNotAILABS/nexus",
+      "role": "Nexus registry and cross-system coordination authority",
+      "status": "active-first",
+      "next_gate": "register all family repos and connector handoffs"
+    },
+    {
+      "repo": "ItsNotAILABS/nova-intelligence",
+      "role": "Core intelligence runtime exports and proof-bearing engine contracts",
+      "status": "active-first",
+      "next_gate": "define intelligence surface manifest"
+    },
+    {
+      "repo": "ItsNotAILABS/PhantomSDK",
+      "role": "SDK packaging surface for external builders and local AIs",
+      "status": "active-first",
+      "next_gate": "define package surfaces and install contracts"
+    },
+    {
+      "repo": "ItsNotAILABS/x-mcp-skills",
+      "role": "MCP and external AI connector skills",
+      "status": "active-first",
+      "next_gate": "merge connector skill seed PR"
+    }
+  ],
+  "held_repositories": [
+    {
+      "repo": "ItsNotAILABS/x-organism-bots-mcp",
+      "role": "Organism bot MCP workers",
+      "status": "hold-for-later",
+      "reason": "Operator asked not to push this repo yet"
+    }
+  ],
+  "ignored_repositories": [
+    {
+      "repo": "ItsNotAILABS/demo-repository",
+      "status": "ignore-for-now"
+    }
+  ]
+}
