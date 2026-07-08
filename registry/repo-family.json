@@ -1,0 +1,19 @@
+{
+  "schema": "nova.repo_family_registry.v1",
+  "registry_owner": "ItsNotAILABS/nexus",
+  "family": "NOVA repo family",
+  "members": [
+    "ItsNotAILABS/nexus",
+    "ItsNotAILABS/nova-intelligence",
+    "ItsNotAILABS/PhantomSDK",
+    "ItsNotAILABS/x-mcp-skills"
+  ],
+  "held": ["ItsNotAILABS/x-organism-bots-mcp"],
+  "ignored_for_now": ["ItsNotAILABS/demo-repository"],
+  "proof_gates": [
+    "each repo has a role manifest",
+    "each active repo has a README with next gate",
+    "connector repos expose machine-readable registry files",
+    "Nexus records family status"
+  ]
+}
