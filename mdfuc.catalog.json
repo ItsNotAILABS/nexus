@@ -36,6 +36,38 @@
       "next_gate": "merge bot-family expansion, add receipt storage, and add CI validation"
     }
   ],
+  "activation_candidates": [
+    {
+      "repo": "ItsNotAILABS/nova-connector-control-plane",
+      "role": "Dedicated production home for connector routing, connectorctl, live MCP discovery, and artifact import dashboards",
+      "status": "empty-seed-ready",
+      "next_gate": "seed manifest, README, connector registry import, and CLI skeleton"
+    },
+    {
+      "repo": "ItsNotAILABS/mercatus-launch-studio",
+      "role": "Launch studio for product pages, pricing advisors, onboarding flows, creator profiles, and outreach guardrails",
+      "status": "seed-ready",
+      "next_gate": "seed product manifest, launch workflow docs, and pricing model"
+    },
+    {
+      "repo": "ItsNotAILABS/specforge-launch-studio",
+      "role": "Click-only app specification builder and 10-section export studio",
+      "status": "empty-seed-ready",
+      "next_gate": "seed spec schema, project workspace model, and export template"
+    },
+    {
+      "repo": "ItsNotAILABS/MatDaemon",
+      "role": "AI-native matrix compute daemon, SDK, CLI, REST API, MCP server, benchmarks, and CUDA backend",
+      "status": "existing-platform",
+      "next_gate": "register as Substratum compute engine and bind to NOVA intelligence contracts"
+    },
+    {
+      "repo": "ItsNotAILABS/containers-nova-APPS",
+      "role": "Containerized NOVA app/runtime deployment surface",
+      "status": "candidate-runtime-surface",
+      "next_gate": "inspect contents and classify deployment contracts"
+    }
+  ],
   "watch_repositories": [
     {
       "repo": "ItsNotAILABS/x-organism-bots-mcp",
@@ -55,6 +87,7 @@
     "every active repo has a README with next gate",
     "connector repos expose machine-readable registry files",
     "release artifacts have checksums and upload status",
-    "Nexus records family status and branch lineage"
+    "Nexus records family status and branch lineage",
+    "activation candidates are seeded before promotion to active"
   ]
 }
