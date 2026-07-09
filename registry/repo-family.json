@@ -1,0 +1,38 @@
+{
+  "schema": "nova.repo_family_registry.v2",
+  "registry_owner": "ItsNotAILABS/nexus",
+  "family": "NOVA repo family",
+  "members": [
+    "ItsNotAILABS/nexus",
+    "ItsNotAILABS/nova-intelligence",
+    "ItsNotAILABS/PhantomSDK",
+    "ItsNotAILABS/x-mcp-skills",
+    "ItsNotAILABS/organism-bots-mcp-server"
+  ],
+  "watch": [
+    "ItsNotAILABS/x-organism-bots-mcp"
+  ],
+  "ignored_for_now": ["ItsNotAILABS/demo-repository"],
+  "role_index": {
+    "registry": "ItsNotAILABS/nexus",
+    "intelligence_contracts": "ItsNotAILABS/nova-intelligence",
+    "sdk_packaging": "ItsNotAILABS/PhantomSDK",
+    "external_ai_connectors": "ItsNotAILABS/x-mcp-skills",
+    "organism_bots_mcp": "ItsNotAILABS/organism-bots-mcp-server"
+  },
+  "active_pull_requests": [
+    "https://github.com/ItsNotAILABS/nexus/pull/1",
+    "https://github.com/ItsNotAILABS/nova-intelligence/pull/1",
+    "https://github.com/ItsNotAILABS/PhantomSDK/pull/1",
+    "https://github.com/ItsNotAILABS/x-mcp-skills/pull/3",
+    "https://github.com/ItsNotAILABS/organism-bots-mcp-server/pull/3"
+  ],
+  "proof_gates": [
+    "each repo has a role manifest",
+    "each active repo has a README with next gate",
+    "connector repos expose machine-readable registry files",
+    "Nexus records family status",
+    "release artifacts have checksum and upload status",
+    "PR lineage is tracked before merge"
+  ]
+}

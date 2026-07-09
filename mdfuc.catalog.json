@@ -1,0 +1,93 @@
+{
+  "schema": "medina.mdfuc.catalog.v2",
+  "name": "Medina Development Federation Unified Catalog",
+  "authority": "ItsNotAILABS / Casa de Medina / NOVA",
+  "truth_line": "MDFUC tracks the repo family as one coordinated development organism, not scattered repositories.",
+  "catalog_status": "production-hardening",
+  "active_repositories": [
+    {
+      "repo": "ItsNotAILABS/nexus",
+      "role": "Nexus registry, artifact lineage, repo-family coordination, and MDFUC authority",
+      "status": "active",
+      "next_gate": "validate catalog and publish repo-family readiness dashboard"
+    },
+    {
+      "repo": "ItsNotAILABS/nova-intelligence",
+      "role": "Core intelligence runtime exports, engine contracts, research doctrine, and proof-bearing papers",
+      "status": "active",
+      "next_gate": "add schemas, research certification matrix, and engine readiness map"
+    },
+    {
+      "repo": "ItsNotAILABS/PhantomSDK",
+      "role": "SDK packaging surface, release manifests, checksums, install contracts, and local-AI builder package exports",
+      "status": "active",
+      "next_gate": "add package starter contracts, release verification, and install surfaces"
+    },
+    {
+      "repo": "ItsNotAILABS/x-mcp-skills",
+      "role": "External AI connector control plane and MCP skill catalog",
+      "status": "active",
+      "next_gate": "merge connector expansion and add connectorctl"
+    },
+    {
+      "repo": "ItsNotAILABS/organism-bots-mcp-server",
+      "role": "Organism Bots MCP server, bot registry, task receipts, and runnable bot-control surface",
+      "status": "active",
+      "next_gate": "merge bot-family expansion, add receipt storage, and add CI validation"
+    }
+  ],
+  "activation_candidates": [
+    {
+      "repo": "ItsNotAILABS/nova-connector-control-plane",
+      "role": "Dedicated production home for connector routing, connectorctl, live MCP discovery, and artifact import dashboards",
+      "status": "empty-seed-ready",
+      "next_gate": "seed manifest, README, connector registry import, and CLI skeleton"
+    },
+    {
+      "repo": "ItsNotAILABS/mercatus-launch-studio",
+      "role": "Launch studio for product pages, pricing advisors, onboarding flows, creator profiles, and outreach guardrails",
+      "status": "seed-ready",
+      "next_gate": "seed product manifest, launch workflow docs, and pricing model"
+    },
+    {
+      "repo": "ItsNotAILABS/specforge-launch-studio",
+      "role": "Click-only app specification builder and 10-section export studio",
+      "status": "empty-seed-ready",
+      "next_gate": "seed spec schema, project workspace model, and export template"
+    },
+    {
+      "repo": "ItsNotAILABS/MatDaemon",
+      "role": "AI-native matrix compute daemon, SDK, CLI, REST API, MCP server, benchmarks, and CUDA backend",
+      "status": "existing-platform",
+      "next_gate": "register as Substratum compute engine and bind to NOVA intelligence contracts"
+    },
+    {
+      "repo": "ItsNotAILABS/containers-nova-APPS",
+      "role": "Containerized NOVA app/runtime deployment surface",
+      "status": "candidate-runtime-surface",
+      "next_gate": "inspect contents and classify deployment contracts"
+    }
+  ],
+  "watch_repositories": [
+    {
+      "repo": "ItsNotAILABS/x-organism-bots-mcp",
+      "role": "Legacy or renamed organism bot surface",
+      "status": "watch-renamed-surface",
+      "reason": "Repository appears to have moved into ItsNotAILABS/organism-bots-mcp-server"
+    }
+  ],
+  "ignored_repositories": [
+    {
+      "repo": "ItsNotAILABS/demo-repository",
+      "status": "ignore-for-now"
+    }
+  ],
+  "proof_gates": [
+    "every active repo has a role manifest",
+    "every active repo has a README with next gate",
+    "connector repos expose machine-readable registry files",
+    "release artifacts have checksums and upload status",
+    "Nexus records family status and branch lineage",
+    "activation candidates are seeded before promotion to active"
+  ]
+}

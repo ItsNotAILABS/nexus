@@ -1,0 +1,82 @@
+{
+  "schema": "mdfuc.artifact_map.v1",
+  "catalog": "Medina Development Federation Unified Catalog",
+  "release": "v0.3.8",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "authority": "Codex Phantasmatis",
+  "surfaces": {
+    "nexus": {
+      "repository": "ItsNotAILABS/nexus",
+      "branch": "codex/mdfuc-registry",
+      "pull_request": "https://github.com/ItsNotAILABS/nexus/pull/1",
+      "role": "Registry, repo-family map, artifact lineage, and MDFUC authority."
+    },
+    "nova_intelligence": {
+      "repository": "ItsNotAILABS/nova-intelligence",
+      "branch": "codex/mdfuc-intelligence",
+      "pull_request": "https://github.com/ItsNotAILABS/nova-intelligence/pull/1",
+      "role": "Research papers, runtime engine contracts, and intelligence doctrine."
+    },
+    "phantom_sdk": {
+      "repository": "ItsNotAILABS/PhantomSDK",
+      "branch": "codex/mdfuc-sdk",
+      "pull_request": "https://github.com/ItsNotAILABS/PhantomSDK/pull/1",
+      "role": "SDK packaging surface and v0.3.8 release manifest."
+    },
+    "x_mcp_skills": {
+      "repository": "ItsNotAILABS/x-mcp-skills",
+      "branch": "codex/external-ai-connectors",
+      "pull_request": "https://github.com/ItsNotAILABS/x-mcp-skills/pull/1",
+      "role": "MCP skill surface, Caffeine connector bridge, Grok Build bridge, and tool/artifact schemas."
+    }
+  },
+  "research_papers": [
+    "research/HOUSE_CODEX_RUNTIME_PAPER.md",
+    "research/FOUNDATION_MODEL_FAMILY.md",
+    "research/CODING_HARNESS_AND_MULTI_AI_PRODUCTS.md",
+    "research/EXTERNAL_AI_CONNECTOR_PLATFORM.md",
+    "research/CPL_LANGUAGE_FAMILY.md",
+    "research/LANGUAGE_ENGINE_RING.md",
+    "research/NOVA_RECURSIVE_MINIVERSE.md",
+    "research/NOVA_PROTOCOL_SUITE.md",
+    "research/NOVA_SURFACE_STRATEGY.md",
+    "research/WASM_RUNTIME_STRATEGY.md"
+  ],
+  "connector_contracts": [
+    "schemas/caffeine-mtp-tool-list.schema.json",
+    "schemas/caffeine-artifact-return.schema.json",
+    "examples/caffeine-mtp-tool-discovery.example.json",
+    "examples/caffeine-artifact-return.example.json"
+  ],
+  "release_artifacts": [
+    {
+      "name": "NOVA_CODEX_FULL_RELEASE_v0.3.8.zip",
+      "repository": "ItsNotAILABS/PhantomSDK",
+      "target_path": "releases/v0.3.8/NOVA_CODEX_FULL_RELEASE_v0.3.8.zip",
+      "sha256": "b80b1eca31901002a9aa1f03180887ffd3813fbb01f5728800243b64758e8cd8",
+      "size_hint": "772K",
+      "upload_status": "pending_binary_lane"
+    },
+    {
+      "name": "NOVA_CODEX_DESKTOP_SOURCE_v0.3.8.zip",
+      "repository": "ItsNotAILABS/PhantomSDK",
+      "target_path": "releases/v0.3.8/NOVA_CODEX_DESKTOP_SOURCE_v0.3.8.zip",
+      "sha256": "70458f66add767e6726231cdd701d7222375aa919ecba51564c5fcb096d5700b",
+      "size_hint": "152K",
+      "upload_status": "pending_binary_lane"
+    }
+  ],
+  "held_repositories": [
+    {
+      "repository": "ItsNotAILABS/x-organism-bots-mcp",
+      "reason": "Held by operator instruction. Do not push in this pass."
+    }
+  ],
+  "ignored_repositories": [
+    {
+      "repository": "ItsNotAILABS/demo-repository",
+      "reason": "Not a focus surface for this pass."
+    }
+  ],
+  "next_gate": "Use a Git-capable local lane or GitHub Release upload path to attach binary zips, then update upload_status to committed."
+}
