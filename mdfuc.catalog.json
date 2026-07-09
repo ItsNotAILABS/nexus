@@ -1,40 +1,47 @@
 {
-  "schema": "medina.mdfuc.catalog.v1",
+  "schema": "medina.mdfuc.catalog.v2",
   "name": "Medina Development Federation Unified Catalog",
   "authority": "ItsNotAILABS / Casa de Medina / NOVA",
   "truth_line": "MDFUC tracks the repo family as one coordinated development organism, not scattered repositories.",
+  "catalog_status": "production-hardening",
   "active_repositories": [
     {
       "repo": "ItsNotAILABS/nexus",
-      "role": "Nexus registry and cross-system coordination authority",
-      "status": "active-first",
-      "next_gate": "register all family repos and connector handoffs"
+      "role": "Nexus registry, artifact lineage, repo-family coordination, and MDFUC authority",
+      "status": "active",
+      "next_gate": "validate catalog and publish repo-family readiness dashboard"
     },
     {
       "repo": "ItsNotAILABS/nova-intelligence",
-      "role": "Core intelligence runtime exports and proof-bearing engine contracts",
-      "status": "active-first",
-      "next_gate": "define intelligence surface manifest"
+      "role": "Core intelligence runtime exports, engine contracts, research doctrine, and proof-bearing papers",
+      "status": "active",
+      "next_gate": "add schemas, research certification matrix, and engine readiness map"
     },
     {
       "repo": "ItsNotAILABS/PhantomSDK",
-      "role": "SDK packaging surface for external builders and local AIs",
-      "status": "active-first",
-      "next_gate": "define package surfaces and install contracts"
+      "role": "SDK packaging surface, release manifests, checksums, install contracts, and local-AI builder package exports",
+      "status": "active",
+      "next_gate": "add package starter contracts, release verification, and install surfaces"
     },
     {
       "repo": "ItsNotAILABS/x-mcp-skills",
-      "role": "MCP and external AI connector skills",
-      "status": "active-first",
-      "next_gate": "merge connector skill seed PR"
+      "role": "External AI connector control plane and MCP skill catalog",
+      "status": "active",
+      "next_gate": "merge connector expansion and add connectorctl"
+    },
+    {
+      "repo": "ItsNotAILABS/organism-bots-mcp-server",
+      "role": "Organism Bots MCP server, bot registry, task receipts, and runnable bot-control surface",
+      "status": "active",
+      "next_gate": "merge bot-family expansion, add receipt storage, and add CI validation"
     }
   ],
-  "held_repositories": [
+  "watch_repositories": [
     {
       "repo": "ItsNotAILABS/x-organism-bots-mcp",
-      "role": "Organism bot MCP workers",
-      "status": "hold-for-later",
-      "reason": "Operator asked not to push this repo yet"
+      "role": "Legacy or renamed organism bot surface",
+      "status": "watch-renamed-surface",
+      "reason": "Repository appears to have moved into ItsNotAILABS/organism-bots-mcp-server"
     }
   ],
   "ignored_repositories": [
@@ -42,5 +49,12 @@
       "repo": "ItsNotAILABS/demo-repository",
       "status": "ignore-for-now"
     }
+  ],
+  "proof_gates": [
+    "every active repo has a role manifest",
+    "every active repo has a README with next gate",
+    "connector repos expose machine-readable registry files",
+    "release artifacts have checksums and upload status",
+    "Nexus records family status and branch lineage"
   ]
 }
