@@ -3,6 +3,7 @@
 ![Status](https://img.shields.io/badge/status-production%20hardening-blue)
 ![MDFUC](https://img.shields.io/badge/MDFUC-registry%20authority-0b7285)
 ![Repos](https://img.shields.io/badge/active%20repos-5-6f42c1)
+![Candidates](https://img.shields.io/badge/activation%20candidates-5-orange)
 ![Release](https://img.shields.io/badge/release-v0.3.8-2f9e44)
 ![Validator](https://img.shields.io/badge/validator-stdlib%20python-success)
 
@@ -23,6 +24,16 @@ NOVA registry, AI infrastructure registry, MCP repo family, agent platform regis
 | `ItsNotAILABS/PhantomSDK` | SDK packaging, release manifests, checksums, install contracts |
 | `ItsNotAILABS/x-mcp-skills` | External AI connector control plane and MCP skill catalog |
 | `ItsNotAILABS/organism-bots-mcp-server` | Organism Bots MCP server, bot registry, task receipts, runnable bot-control surface |
+
+## Activation Candidates
+
+| Repository | Intended Role |
+| --- | --- |
+| `ItsNotAILABS/nova-connector-control-plane` | Dedicated production home for connector routing, `connectorctl`, live MCP discovery, and artifact import dashboards |
+| `ItsNotAILABS/mercatus-launch-studio` | Launch studio for product pages, pricing advisors, onboarding flows, creator profiles, and outreach guardrails |
+| `ItsNotAILABS/specforge-launch-studio` | Click-only app specification builder and 10-section export studio |
+| `ItsNotAILABS/MatDaemon` | AI-native matrix compute daemon, SDK, CLI, REST API, MCP server, benchmarks, and CUDA backend |
+| `ItsNotAILABS/containers-nova-APPS` | Containerized NOVA app/runtime deployment surface |
 
 ## Quick Start
 
@@ -65,4 +76,4 @@ Recommended repository topics:
 
 ## Next Gate
 
-Add CI for `python tools/validate_mdfuc_catalog.py`, then add a machine-readable `registry/status.json` for active PR readiness across the repo family.
+Add CI for `python tools/validate_mdfuc_catalog.py`, then seed activation candidates with role manifests and production READMEs before promoting them to active.
