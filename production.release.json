@@ -1,0 +1,35 @@
+{
+  "schema": "nexus.ecosystem-release.v1",
+  "release": "2026.08-production-mvp.1",
+  "protocol_registry": "protocols/ecosystem.protocols.json",
+  "federation_registry": "registry/ecosystem-alpha.json",
+  "production_gate": "tools/production_gate.py",
+  "operator_cli": "tools/ecosystemctl.py",
+  "runbook": "docs/ECOSYSTEM_PRODUCTION_RUNBOOK.md",
+  "required_protocol_count": 29,
+  "required_component_count": 22,
+  "required_assertions": 100,
+  "core_components": [
+    "nexus",
+    "pocket",
+    "pocket-agent",
+    "pocket-voice",
+    "phone-ai",
+    "matdaemon",
+    "capsula",
+    "medina-memory-systems"
+  ],
+  "release_sequence": [
+    "validate_protocols",
+    "validate_registry",
+    "validate_integration_fixture",
+    "validate_operator_cli",
+    "validate_protocol_runtime",
+    "run_production_gate",
+    "start_control_plane",
+    "start_required_workers",
+    "probe_health",
+    "execute_integration_task",
+    "capture_receipts"
+  ]
+}
