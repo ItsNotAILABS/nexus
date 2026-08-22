@@ -22,6 +22,9 @@ jobs:
         run: python tools/validate_ecosystem_registry.py
       - name: Validate end-to-end protocol fixture
         run: python tools/validate_ecosystem_flow.py
+      - name: Validate operator routing and plan compiler
+        working-directory: tools
+        run: python test_ecosystemctl.py
 
   legacy-mdfuc:
     runs-on: ubuntu-latest
