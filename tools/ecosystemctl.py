@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 """NEXUS ecosystem operator CLI.
 
-Dependency-free, deterministic tooling for inspecting the federation registry,
-routing intents, surfacing activation gaps, and compiling bounded Alpha plans.
-It does not execute tasks; it produces reviewable protocol objects for governed
-runtimes such as POCKET Agent, MatDaemon, CAPSULA, and connector workers.
+Dependency-free registry inspection, deterministic routing, promotion-gap review,
+and bounded nexus.plan.v1 compilation. This tool plans work but never executes it.
 """
 from __future__ import annotations
 
@@ -21,10 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "registry" / "ecosystem-alpha.json"
 PROTOCOL_PATH = ROOT / "protocols" / "ecosystem.protocols.json"
 
-STOPWORDS = {
-    "a", "an", "and", "the", "to", "of", "for", "in", "on", "with", "from",
-    "me", "my", "our", "this", "that", "please", "make", "create", "build",
-}
+STOPWORDS = {"a", "an", "and", "the", "to", "of", "for", "in", "on", "with", "from", "me", "my", "our", "this", "that", "please", "make", "create"}
 
 PLANE_TERMS = {
     "federation": {"protocol", "registry", "compatibility", "federation", "route"},
@@ -49,11 +44,49 @@ PLANE_TERMS = {
     "builder": {"forge", "builder", "build", "package", "release"},
 }
 
-HIGH_IMPACT_TERMS = {
-    "deploy", "publish", "production", "live", "trade", "settle", "transfer",
-    "delete", "revoke", "write", "execute", "shell", "network_scan", "weapon",
+DEFAULT_ACTION = {
+    "nexus": "ecosystem.route",
+    "pocket": "host.route",
+    "pocket-agent": "agent.run",
+    "pocket-voice": "voice.turn.decide",
+    "nova-intelligence": "intelligence.plan.review",
+    "phantom-sdk": "sdk.compatibility.check",
+    "x-mcp-skills": "connector.plan_run",
+    "organism-bots": "organism.route_plan",
+    "matdaemon": "compute.validate_matrices",
+    "capsula": "capsula.session.run",
+    "medina-memory-systems": "memory.context.query",
+    "auro-mesie-runtime": "model.capabilities",
+    "auro14b": "model.family.describe",
+    "nova-connector-control-plane": "connector.route_plan",
+    "nova-app-containers": "container.build.plan",
+    "phone-ai": "phone.command.plan",
+    "researchers-hub": "research.construct",
+    "cybersecurity-ai": "security.policy.check",
+    "chimeria": "chimeria.simulation.plan",
+    "parralax": "market.order.plan",
+    "parallax-clearinghouse": "clearing.settlement.plan",
+    "sovereign-forge-os": "forge.plan.compile",
 }
 
+INTENT_ACTION_HINTS = [
+    ({"matrix", "matmul", "similarity"}, "matdaemon", "compute.validate_matrices"),
+    ({"benchmark", "compute"}, "matdaemon", "compute.benchmark_smoke"),
+    ({"capsule", "sandbox", "wasm"}, "capsula", "capsula.session.run"),
+    ({"voice", "speech", "audio"}, "pocket-voice", "voice.turn.decide"),
+    ({"memory", "recall", "context"}, "medina-memory-systems", "memory.context.query"),
+    ({"trade", "order", "market"}, "parralax", "market.order.plan"),
+    ({"netting", "clearing", "settlement"}, "parallax-clearinghouse", "clearing.netting.compute"),
+    ({"security", "incident", "iam"}, "cybersecurity-ai", "security.policy.check"),
+    ({"research", "paper", "figure"}, "researchers-hub", "research.construct"),
+    ({"deploy", "container", "image"}, "nova-app-containers", "container.build.plan"),
+    ({"phone", "mobile", "device"}, "phone-ai", "phone.command.plan"),
+    ({"connector", "mcp", "claude", "grok"}, "nova-connector-control-plane", "connector.route_plan"),
+    ({"checkpoint", "auro"}, "auro14b", "model.checkpoint.inventory"),
+]
+
+HIGH_RISK = {"production", "live", "weapon", "settle", "transfer"}
+MEDIUM_RISK = {"deploy", "publish", "trade", "delete", "revoke", "write", "execute", "shell", "network_scan"}
 DEFAULT_BUDGET = {
     "wall_seconds": 300,
     "max_tokens": 120000,
@@ -72,8 +105,7 @@ def now() -> str:
 
 
 def stable_id(prefix: str, value: str) -> str:
-    digest = hashlib.sha256(value.encode("utf-8")).hexdigest()[:16]
-    return f"{prefix}_{digest}"
+    return f"{prefix}_{hashlib.sha256(value.encode('utf-8')).hexdigest()[:16]}"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -92,60 +124,47 @@ def protocols() -> dict[str, Any]:
 
 
 def components(data: dict[str, Any] | None = None) -> list[dict[str, Any]]:
-    data = data or registry()
-    return [x for x in data.get("components", []) if isinstance(x, dict)]
+    return [x for x in (data or registry()).get("components", []) if isinstance(x, dict)]
 
 
 def tokenize(text: str) -> set[str]:
-    return {
-        token for token in re.findall(r"[a-z0-9][a-z0-9_.-]+", text.lower())
-        if token not in STOPWORDS and len(token) > 1
-    }
+    return {t for t in re.findall(r"[a-z0-9][a-z0-9_.-]+", text.lower()) if t not in STOPWORDS and len(t) > 1}
 
 
 def route(intent: str, items: Iterable[dict[str, Any]]) -> dict[str, Any]:
     tokens = tokenize(intent)
-    ranked: list[dict[str, Any]] = []
+    ranked = []
     for item in items:
         plane = str(item.get("plane") or "")
-        authority = [str(x) for x in item.get("authority") or []]
         component = str(item.get("component") or "")
-        repo = str(item.get("repo") or "")
-        searchable = tokenize(" ".join([component, repo, plane, *authority]))
-        direct_hits = len(tokens & searchable)
+        authority = [str(x) for x in item.get("authority") or []]
+        searchable = tokenize(" ".join([component, str(item.get("repo") or ""), plane, *authority]))
+        direct = len(tokens & searchable)
         plane_hits = len(tokens & PLANE_TERMS.get(plane, set()))
-        exact_component = 2 if component.lower() in intent.lower() else 0
+        exact = 2 if component.lower() in intent.lower() else 0
         status = str(item.get("status") or "activation-candidate")
-        status_weight = {"active": 1.0, "protocol-ready": 0.88, "activation-candidate": 0.68}.get(status, 0.6)
-        raw = direct_hits * 2.0 + plane_hits * 1.5 + exact_component
-        denominator = max(2.0, len(tokens) * 2.0)
-        score = min(1.0, (raw / denominator) * status_weight)
-        ranked.append({
-            "component": component,
-            "repo": repo,
-            "plane": plane,
-            "status": status,
-            "score": round(score, 3),
-            "authority": authority,
-        })
-    ranked.sort(key=lambda x: (-x["score"], x["component"]))
+        weight = {"active": 1.0, "protocol-ready": 0.88, "activation-candidate": 0.68}.get(status, 0.6)
+        score = min(1.0, ((direct * 2.0 + plane_hits * 1.5 + exact) / max(2.0, len(tokens) * 2.0)) * weight)
+        ranked.append({**item, "score": round(score, 3)})
+    ranked.sort(key=lambda x: (-x["score"], str(x.get("component"))))
     best = ranked[0] if ranked else None
     confidence = float(best["score"]) if best else 0.0
-    return {
-        "intent": intent,
-        "selected": best,
-        "confidence": confidence,
-        "needs_review": best is None or confidence < 0.28,
-        "alternatives": ranked[:5],
-    }
+    return {"intent": intent, "selected": best, "confidence": confidence, "needs_review": best is None or confidence < 0.28, "alternatives": ranked[:5]}
+
+
+def select_action(intent: str, component: str) -> str:
+    tokens = tokenize(intent)
+    for hints, target, action in INTENT_ACTION_HINTS:
+        if target == component and tokens & hints:
+            return action
+    return DEFAULT_ACTION.get(component, "component.describe")
 
 
 def promotion_gaps(item: dict[str, Any], data: dict[str, Any]) -> list[str]:
-    status = item.get("status")
     rules = data.get("promotion_rules") or {}
-    if status == "activation-candidate":
+    if item.get("status") == "activation-candidate":
         return list(rules.get("activation-candidate_to_protocol-ready") or [])
-    if status == "protocol-ready":
+    if item.get("status") == "protocol-ready":
         return list(rules.get("protocol-ready_to_active") or [])
     return []
 
@@ -154,243 +173,109 @@ def risk_for_intent(intent: str, requested: str | None = None) -> str:
     if requested:
         return requested
     tokens = tokenize(intent)
-    if tokens & {"weapon", "settle", "transfer", "production", "live"}:
+    if tokens & HIGH_RISK:
         return "high"
-    if tokens & HIGH_IMPACT_TERMS:
+    if tokens & MEDIUM_RISK:
         return "medium"
     return "low"
 
 
-def compile_plan(
-    intent: str,
-    *,
-    tenant: str,
-    principal: str,
-    project: str,
-    session: str | None = None,
-    risk: str | None = None,
-) -> dict[str, Any]:
+def compile_plan(intent: str, *, tenant: str, principal: str, project: str, session: str | None = None, risk: str | None = None) -> dict[str, Any]:
     data = registry()
     routing = route(intent, components(data))
     selected = routing.get("selected")
     if not selected:
         raise SystemExit("no ecosystem component available")
-
+    component = str(selected["component"])
+    action = select_action(intent, component)
     risk_tier = risk_for_intent(intent, risk)
-    review = routing["needs_review"] or selected["status"] == "activation-candidate"
-    confirmation = risk_tier in {"medium", "high"} or review
-    request_seed = "|".join([intent, tenant, principal, project, session or ""])
-    request_id = stable_id("req", request_seed)
-    plan_id = stable_id("plan", request_seed + "|" + str(selected["component"]))
+    candidate = selected.get("status") == "activation-candidate"
+    confirmation = risk_tier in {"medium", "high"} or routing["needs_review"] or candidate
+    seed = "|".join([intent, tenant, principal, project, session or ""])
+    request_id = stable_id("req", seed)
+    plan_id = stable_id("plan", seed + "|" + component + "|" + action)
 
-    policy = {
-        "schema": "nexus.policy-decision.v1",
-        "request_id": request_id,
-        "decision": "confirm" if confirmation else "allow",
-        "policy_id": "nexus.alpha.plan-compiler.v1",
-        "reasons": (
-            ["ambiguous_or_candidate_route"] if review else []
-        ) + (["high_impact_or_mutating_intent"] if risk_tier in {"medium", "high"} else ["bounded_low_risk_intent"]),
-        "decided_at": now(),
-    }
-    budget = {"schema": "nexus.budget.v1", "limits": dict(DEFAULT_BUDGET)}
+    policy_reasons = []
+    if routing["needs_review"]:
+        policy_reasons.append("low_route_confidence")
+    if candidate:
+        policy_reasons.append("activation_candidate_requires_review")
+    if risk_tier in {"medium", "high"}:
+        policy_reasons.append("high_impact_or_mutating_intent")
+    if not policy_reasons:
+        policy_reasons.append("bounded_low_risk_intent")
+
+    budget_limits = dict(DEFAULT_BUDGET)
     if risk_tier == "high":
-        budget["limits"].update({"max_cost_usd": 5.0, "max_external_calls": 5, "max_files_changed": 10})
+        budget_limits.update({"max_cost_usd": 5.0, "max_external_calls": 5, "max_files_changed": 10})
 
-    steps: list[dict[str, Any]] = [
-        {
-            "id": "discover",
-            "component": "nexus",
-            "action": "ecosystem.route",
-            "depends_on": [],
-            "output": "capability route",
-        },
-        {
-            "id": "policy",
-            "component": "pocket" if any(c.get("component") == "pocket" for c in components(data)) else "nexus",
-            "action": "host.policy.decide",
-            "depends_on": ["discover"],
-            "output": "policy decision",
-        },
+    steps = [
+        {"id": "discover", "component": "nexus", "action": "ecosystem.route", "depends_on": [], "output": "capability route"},
+        {"id": "policy", "component": "pocket", "action": "host.policy.decide", "depends_on": ["discover"], "output": "nexus.policy-decision.v1"},
     ]
     if confirmation:
-        steps.append({
-            "id": "approval",
-            "component": "pocket",
-            "action": "host.approval.request",
-            "depends_on": ["policy"],
-            "output": "nexus.approval.v1",
-        })
-    execution_dep = "approval" if confirmation else "policy"
+        steps.append({"id": "approval", "component": "pocket", "action": "host.approval.request", "depends_on": ["policy"], "output": "nexus.approval.v1"})
     steps.extend([
-        {
-            "id": "execute",
-            "component": selected["component"],
-            "action": "component-selected-action",
-            "depends_on": [execution_dep],
-            "output": "artifact + execution receipt",
-        },
-        {
-            "id": "evaluate",
-            "component": "pocket-agent" if selected["component"] != "pocket-agent" else "nexus",
-            "action": "agent.evaluate_outcome" if selected["component"] != "pocket-agent" else "ecosystem.evaluate",
-            "depends_on": ["execute"],
-            "output": "acceptance result",
-        },
-        {
-            "id": "handoff",
-            "component": "nexus",
-            "action": "ecosystem.handoff",
-            "depends_on": ["evaluate"],
-            "output": "nexus.handoff.v1",
-        },
+        {"id": "execute", "component": component, "action": action, "depends_on": ["approval" if confirmation else "policy"], "output": "artifact + nexus.execution-receipt.v1"},
+        {"id": "evaluate", "component": "pocket-agent" if component != "pocket-agent" else "nexus", "action": "agent.evaluate_outcome" if component != "pocket-agent" else "ecosystem.evaluate", "depends_on": ["execute"], "output": "acceptance result"},
+        {"id": "handoff", "component": "nexus", "action": "ecosystem.handoff", "depends_on": ["evaluate"], "output": "nexus.handoff.v1"},
     ])
-
-    acceptance = {
-        "require_receipt": True,
-        "require_artifact_hashes_for_outputs": True,
-        "require_tenant_correlation": True,
-        "require_request_correlation": True,
-        "allow_private_reasoning_export": False,
-        "require_operator_approval": confirmation,
-    }
 
     return {
         "schema": "nexus.plan.v1",
         "plan_id": plan_id,
         "request_id": request_id,
         "intent": intent,
-        "principal": {
-            "schema": "nexus.identity-ref.v1",
-            "principal_id": principal,
-            "principal_type": "user",
-            "tenant_id": tenant,
-            "auth_context": "operator-supplied-reference",
-        },
-        "scope": {
-            "tenant_id": tenant,
-            "project_id": project,
-            "session_id": session,
-        },
+        "principal": {"schema": "nexus.identity-ref.v1", "principal_id": principal, "principal_type": "user", "tenant_id": tenant, "auth_context": "operator-supplied-reference"},
+        "scope": {"tenant_id": tenant, "project_id": project, "session_id": session},
         "route": routing,
         "risk_tier": risk_tier,
-        "policy": policy,
-        "budget": budget,
+        "policy": {"schema": "nexus.policy-decision.v1", "request_id": request_id, "decision": "confirm" if confirmation else "allow", "policy_id": "nexus.alpha.plan-compiler.v1", "reasons": policy_reasons, "decided_at": now()},
+        "budget": {"schema": "nexus.budget.v1", "limits": budget_limits},
         "steps": steps,
-        "acceptance": acceptance,
+        "acceptance": {"require_receipt": True, "require_artifact_hashes_for_outputs": True, "require_tenant_correlation": True, "require_request_correlation": True, "allow_private_reasoning_export": False, "require_operator_approval": confirmation},
         "created_at": now(),
     }
 
 
-def print_json(value: Any) -> None:
-    print(json.dumps(value, indent=2, sort_keys=False))
-
-
-def command_list(args: argparse.Namespace) -> int:
-    rows = components()
-    if args.status:
-        rows = [r for r in rows if r.get("status") == args.status]
-    if args.plane:
-        rows = [r for r in rows if r.get("plane") == args.plane]
-    print_json(rows)
-    return 0
-
-
-def command_describe(args: argparse.Namespace) -> int:
-    matches = [c for c in components() if args.component in {c.get("component"), c.get("repo")}]
-    if not matches:
-        raise SystemExit(f"unknown component: {args.component}")
-    item = dict(matches[0])
-    item["promotion_gaps"] = promotion_gaps(item, registry())
-    print_json(item)
-    return 0
-
-
-def command_protocols(_: argparse.Namespace) -> int:
-    print_json(protocols())
-    return 0
-
-
-def command_route(args: argparse.Namespace) -> int:
-    print_json(route(args.intent, components()))
-    return 0
-
-
-def command_gaps(args: argparse.Namespace) -> int:
-    data = registry()
-    rows = []
-    for item in components(data):
-        gaps = promotion_gaps(item, data)
-        if gaps:
-            rows.append({
-                "component": item.get("component"),
-                "repo": item.get("repo"),
-                "status": item.get("status"),
-                "next_gate": gaps,
-            })
-    if args.status:
-        rows = [r for r in rows if r["status"] == args.status]
-    print_json(rows)
-    return 0
-
-
-def command_plan(args: argparse.Namespace) -> int:
-    plan = compile_plan(
-        args.intent,
-        tenant=args.tenant,
-        principal=args.principal,
-        project=args.project,
-        session=args.session,
-        risk=args.risk,
-    )
-    if args.output:
-        path = Path(args.output)
-        path.write_text(json.dumps(plan, indent=2) + "\n", encoding="utf-8")
-        print(path)
-    else:
-        print_json(plan)
-    return 0
-
-
-def parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="ecosystemctl", description="Inspect and plan against the NEXUS ecosystem registry")
-    sub = p.add_subparsers(dest="command", required=True)
-
-    sp = sub.add_parser("list", help="list registered ecosystem components")
-    sp.add_argument("--status", choices=["active", "protocol-ready", "activation-candidate"])
-    sp.add_argument("--plane")
-    sp.set_defaults(func=command_list)
-
-    sp = sub.add_parser("describe", help="describe a component and its promotion gaps")
-    sp.add_argument("component")
-    sp.set_defaults(func=command_describe)
-
-    sp = sub.add_parser("protocols", help="print the canonical protocol registry")
-    sp.set_defaults(func=command_protocols)
-
-    sp = sub.add_parser("route", help="rank components for a natural-language intent")
-    sp.add_argument("intent")
-    sp.set_defaults(func=command_route)
-
-    sp = sub.add_parser("gaps", help="show promotion requirements for non-active components")
-    sp.add_argument("--status", choices=["protocol-ready", "activation-candidate"])
-    sp.set_defaults(func=command_gaps)
-
-    sp = sub.add_parser("plan", help="compile a bounded nexus.plan.v1")
-    sp.add_argument("intent")
-    sp.add_argument("--tenant", required=True)
-    sp.add_argument("--principal", required=True)
-    sp.add_argument("--project", required=True)
-    sp.add_argument("--session")
-    sp.add_argument("--risk", choices=["low", "medium", "high"])
-    sp.add_argument("--output")
-    sp.set_defaults(func=command_plan)
-    return p
+def emit(value: Any) -> None:
+    print(json.dumps(value, indent=2))
 
 
 def main(argv: list[str] | None = None) -> int:
-    args = parser().parse_args(argv)
-    return int(args.func(args))
+    p = argparse.ArgumentParser(prog="ecosystemctl")
+    sub = p.add_subparsers(dest="command", required=True)
+    lp = sub.add_parser("list"); lp.add_argument("--status"); lp.add_argument("--plane")
+    dp = sub.add_parser("describe"); dp.add_argument("component")
+    sub.add_parser("protocols")
+    rp = sub.add_parser("route"); rp.add_argument("intent")
+    gp = sub.add_parser("gaps"); gp.add_argument("--status")
+    pp = sub.add_parser("plan"); pp.add_argument("intent"); pp.add_argument("--tenant", required=True); pp.add_argument("--principal", required=True); pp.add_argument("--project", required=True); pp.add_argument("--session"); pp.add_argument("--risk", choices=["low", "medium", "high"]); pp.add_argument("--output")
+    args = p.parse_args(argv)
+
+    if args.command == "list":
+        rows = components()
+        if args.status: rows = [x for x in rows if x.get("status") == args.status]
+        if args.plane: rows = [x for x in rows if x.get("plane") == args.plane]
+        emit(rows)
+    elif args.command == "describe":
+        matches = [x for x in components() if args.component in {x.get("component"), x.get("repo")}]
+        if not matches: raise SystemExit(f"unknown component: {args.component}")
+        item = dict(matches[0]); item["promotion_gaps"] = promotion_gaps(item, registry()); emit(item)
+    elif args.command == "protocols":
+        emit(protocols())
+    elif args.command == "route":
+        emit(route(args.intent, components()))
+    elif args.command == "gaps":
+        data = registry(); rows = [{"component": x.get("component"), "repo": x.get("repo"), "status": x.get("status"), "next_gate": promotion_gaps(x, data)} for x in components(data) if promotion_gaps(x, data)]
+        if args.status: rows = [x for x in rows if x["status"] == args.status]
+        emit(rows)
+    elif args.command == "plan":
+        plan = compile_plan(args.intent, tenant=args.tenant, principal=args.principal, project=args.project, session=args.session, risk=args.risk)
+        if args.output:
+            Path(args.output).write_text(json.dumps(plan, indent=2) + "\n", encoding="utf-8"); print(args.output)
+        else: emit(plan)
+    return 0
 
 
 if __name__ == "__main__":
