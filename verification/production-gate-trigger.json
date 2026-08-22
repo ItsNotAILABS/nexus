@@ -1,0 +1,5 @@
+{
+  "schema": "nexus.production-gate-trigger.v1",
+  "release": "2026.08-production-mvp.1",
+  "reason": "PR-scoped verification of the 100+ assertion ecosystem production gate"
+}
