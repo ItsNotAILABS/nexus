@@ -1,0 +1,83 @@
+{
+  "schema": "nexus.integration-flow.v1",
+  "name": "voice-to-governed-compute-to-memory",
+  "request_id": "req_alpha_fixture_001",
+  "principal": {"id": "fixture-user", "type": "user", "tenant_id": "tenant-alpha"},
+  "scope": {"tenant_id": "tenant-alpha", "session_id": "session-alpha", "project_id": "project-alpha"},
+  "capability_route": {
+    "schema": "nexus.capability.v1",
+    "component": "pocket-agent",
+    "role": "long-running-execution-plane",
+    "actions": ["agent.run"],
+    "limits": {"bounded": true},
+    "proof": {"state": "source"}
+  },
+  "policy": {
+    "schema": "nexus.policy-decision.v1",
+    "request_id": "req_alpha_fixture_001",
+    "decision": "allow",
+    "policy_id": "pocket.fixture.safe-compute.v1",
+    "reasons": ["authenticated", "tenant_scope_match", "non_irreversible_fixture"],
+    "decided_at": "2026-08-22T00:00:00Z"
+  },
+  "context": {
+    "schema": "nexus.context-pack.v1",
+    "request_id": "req_alpha_fixture_001",
+    "items": [
+      {"type": "code-selection", "locator": "fixture/matrix.py", "content": "A=[[1,2],[3,4]]", "sensitivity": "internal", "retention": "session"}
+    ],
+    "provenance": {"component": "pocket-voice", "tenant_id": "tenant-alpha", "session_id": "session-alpha"}
+  },
+  "task": {
+    "schema": "nexus.task.v1",
+    "request_id": "req_alpha_fixture_001",
+    "action": "compute.validate_matrices",
+    "principal": {"id": "fixture-user", "type": "user", "tenant_id": "tenant-alpha"},
+    "scope": {"tenant_id": "tenant-alpha", "session_id": "session-alpha", "project_id": "project-alpha"},
+    "budget": {"schema": "nexus.budget.v1", "limits": {"wall_seconds": 30, "artifact_bytes": 100000, "external_calls": 0}},
+    "payload": {"context_ref": "context:inline", "validation": "finite-shape-only"},
+    "issued_at": "2026-08-22T00:00:01Z"
+  },
+  "artifact": {
+    "schema": "nexus.artifact.v1",
+    "artifact_id": "art_alpha_001",
+    "kind": "matrix-validation-report",
+    "sha256": "f0c3a92d8dc65043e7d2dd7b6ff8bdb34fb1e28de680f04fa5d9df326b8154fb",
+    "created_by": "matdaemon",
+    "request_id": "req_alpha_fixture_001",
+    "created_at": "2026-08-22T00:00:02Z"
+  },
+  "receipt": {
+    "schema": "nexus.execution-receipt.v1",
+    "request_id": "req_alpha_fixture_001",
+    "status": "succeeded",
+    "component": "matdaemon",
+    "action": "compute.validate_matrices",
+    "started_at": "2026-08-22T00:00:01Z",
+    "finished_at": "2026-08-22T00:00:02Z",
+    "runtime_ms": 1000,
+    "artifact_ids": ["art_alpha_001"],
+    "budget_consumed": {"wall_seconds": 1, "external_calls": 0},
+    "digest": "sha256:a1ea456cbf3f84bccf169447448503145f4ddf75fe446743e8304e1bd5a94806"
+  },
+  "memory": {
+    "schema": "nexus.memory-event.v1",
+    "event_id": "mem_alpha_001",
+    "subject": {"type": "project", "id": "project-alpha", "tenant_id": "tenant-alpha"},
+    "kind": "outcome",
+    "content": {"summary": "Matrix validation fixture succeeded", "facts": ["finite", "shape-valid"]},
+    "sensitivity": "internal",
+    "retention": "30d",
+    "provenance": {"component": "matdaemon", "request_id": "req_alpha_fixture_001", "artifact_ids": ["art_alpha_001"]},
+    "created_at": "2026-08-22T00:00:03Z"
+  },
+  "handoff": {
+    "schema": "nexus.handoff.v1",
+    "request_id": "req_alpha_fixture_001",
+    "from": "matdaemon",
+    "to": "pocket",
+    "reason": "bounded compute completed; return validated artifact to product host",
+    "artifacts": ["art_alpha_001"],
+    "created_at": "2026-08-22T00:00:03Z"
+  }
+}

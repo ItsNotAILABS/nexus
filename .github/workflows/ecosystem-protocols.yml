@@ -1,0 +1,41 @@
+name: Ecosystem Protocols
+
+on:
+  push:
+    branches: [main, ecosystem-alpha-intelligence-v1]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ecosystem:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate ecosystem protocol registry
+        run: python tools/validate_ecosystem_protocols.py
+      - name: Validate ecosystem federation registry
+        run: python tools/validate_ecosystem_registry.py
+      - name: Validate end-to-end protocol fixture
+        run: python tools/validate_ecosystem_flow.py
+      - name: Validate operator routing and plan compiler
+        working-directory: tools
+        run: python test_ecosystemctl.py
+      - name: Validate generic protocol runtime
+        working-directory: tools
+        run: python test_protocol_runtime.py
+
+  legacy-mdfuc:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate legacy MDFUC catalog
+        run: python tools/validate_mdfuc_catalog.py
