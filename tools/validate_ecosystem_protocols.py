@@ -10,19 +10,34 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "protocols" / "ecosystem.protocols.json"
 REQUIRED_IDS = {
     "nexus.capability.v1",
+    "nexus.identity-ref.v1",
     "nexus.task.v1",
+    "nexus.plan.v1",
     "nexus.policy-decision.v1",
+    "nexus.approval.v1",
+    "nexus.denial.v1",
     "nexus.budget.v1",
+    "nexus.quota.v1",
+    "nexus.secret-ref.v1",
+    "nexus.retention-policy.v1",
     "nexus.context-pack.v1",
     "nexus.memory-event.v1",
     "nexus.artifact.v1",
     "nexus.execution-receipt.v1",
+    "nexus.audit-event.v1",
     "nexus.health.v1",
     "nexus.telemetry.v1",
     "nexus.compatibility.v1",
     "nexus.handoff.v1",
-    "nexus.denial.v1",
     "nexus.release-evidence.v1",
+}
+REQUIRED_PRINCIPLES = {
+    "tenant-aware",
+    "receipt-backed",
+    "bounded-execution",
+    "capability-discovered",
+    "secret-values-never-on-wire",
+    "human-approval-for-irreversible-actions",
 }
 
 
@@ -38,6 +53,9 @@ def main() -> int:
         fail("wrong registry schema")
     if data.get("authority") != "ItsNotAILABS/nexus":
         fail("nexus must remain registry authority")
+    if not str(data.get("version") or "").endswith("alpha.1"):
+        fail("registry must expose an explicit alpha version")
+
     protocols = data.get("protocols")
     if not isinstance(protocols, list) or not protocols:
         fail("protocols must be a non-empty list")
@@ -47,17 +65,28 @@ def main() -> int:
     missing = sorted(REQUIRED_IDS - set(ids))
     if missing:
         fail("missing required ids: " + ", ".join(missing))
+    unknown = sorted(set(ids) - REQUIRED_IDS)
+    if unknown:
+        fail("unreviewed protocol ids: " + ", ".join(unknown))
+
     for p in protocols:
+        pid = p.get("id")
+        if not isinstance(pid, str) or not pid.startswith("nexus.") or not pid.endswith(".v1"):
+            fail(f"invalid protocol id {pid!r}")
         if not isinstance(p.get("purpose"), str) or len(p["purpose"]) < 12:
-            fail(f"weak purpose for {p.get('id')}")
+            fail(f"weak purpose for {pid}")
         required = p.get("required")
         if not isinstance(required, list) or "schema" not in required:
-            fail(f"invalid required fields for {p.get('id')}")
+            fail(f"invalid required fields for {pid}")
+        if len(required) != len(set(required)):
+            fail(f"duplicate required fields for {pid}")
+
     principles = set(data.get("principles") or [])
-    for principle in {"tenant-aware", "receipt-backed", "bounded-execution", "capability-discovered"}:
-        if principle not in principles:
-            fail(f"missing operating principle {principle}")
-    print(f"ecosystem-protocol-validation: PASS ({len(protocols)} protocols)")
+    missing_principles = sorted(REQUIRED_PRINCIPLES - principles)
+    if missing_principles:
+        fail("missing operating principles: " + ", ".join(missing_principles))
+
+    print(f"ecosystem-protocol-validation: PASS ({len(protocols)} protocols, {len(principles)} principles)")
     return 0
 
 
