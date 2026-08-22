@@ -13,11 +13,19 @@ REQUIRED_IDS = {
     "nexus.identity-ref.v1",
     "nexus.task.v1",
     "nexus.plan.v1",
+    "nexus.job.v1",
     "nexus.policy-decision.v1",
     "nexus.approval.v1",
     "nexus.denial.v1",
     "nexus.budget.v1",
     "nexus.quota.v1",
+    "nexus.idempotency.v1",
+    "nexus.lease.v1",
+    "nexus.retry-policy.v1",
+    "nexus.circuit-breaker.v1",
+    "nexus.event.v1",
+    "nexus.feature-flag.v1",
+    "nexus.incident.v1",
     "nexus.secret-ref.v1",
     "nexus.retention-policy.v1",
     "nexus.context-pack.v1",
@@ -38,6 +46,8 @@ REQUIRED_PRINCIPLES = {
     "capability-discovered",
     "secret-values-never-on-wire",
     "human-approval-for-irreversible-actions",
+    "idempotent-mutations",
+    "failure-isolated-by-default",
 }
 
 
