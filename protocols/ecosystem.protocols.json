@@ -1,0 +1,29 @@
+{
+  "schema": "nexus.ecosystem-protocol-registry.v1",
+  "version": "1.0.0-alpha.1",
+  "authority": "ItsNotAILABS/nexus",
+  "principles": [
+    "provider-neutral",
+    "tenant-aware",
+    "receipt-backed",
+    "bounded-execution",
+    "capability-discovered",
+    "truth-before-claims"
+  ],
+  "protocols": [
+    {"id":"nexus.capability.v1","purpose":"Discover component role, actions, limits, dependencies and proof state","required":["schema","component","role","actions","limits","proof"]},
+    {"id":"nexus.task.v1","purpose":"Route bounded work between ecosystem components","required":["schema","request_id","action","principal","scope","budget","payload","issued_at"]},
+    {"id":"nexus.policy-decision.v1","purpose":"Return allow, deny or confirm decisions before governed action","required":["schema","request_id","decision","policy_id","reasons","decided_at"]},
+    {"id":"nexus.budget.v1","purpose":"Bound time, tokens, cost, files, bytes, subprocesses and external calls","required":["schema","limits"]},
+    {"id":"nexus.context-pack.v1","purpose":"Move curated context without copying entire private state","required":["schema","request_id","items","provenance"]},
+    {"id":"nexus.memory-event.v1","purpose":"Record durable outcome/lesson events with provenance and retention class","required":["schema","event_id","subject","kind","content","provenance","created_at"]},
+    {"id":"nexus.artifact.v1","purpose":"Describe produced files/data/models with hashes, media types and lineage","required":["schema","artifact_id","kind","sha256","created_by","created_at"]},
+    {"id":"nexus.execution-receipt.v1","purpose":"Record bounded execution outcomes without private model reasoning","required":["schema","request_id","status","component","started_at","finished_at","digest"]},
+    {"id":"nexus.health.v1","purpose":"Normalize liveness, readiness, degradation and dependency state","required":["schema","component","status","checks","observed_at"]},
+    {"id":"nexus.telemetry.v1","purpose":"Emit privacy-bounded metrics and traces with request correlation","required":["schema","component","request_id","metrics","observed_at"]},
+    {"id":"nexus.compatibility.v1","purpose":"Declare protocol versions produced/consumed and incompatible changes","required":["schema","component","produces","consumes","minimums"]},
+    {"id":"nexus.handoff.v1","purpose":"Transfer responsibility between components with explicit next owner and evidence","required":["schema","request_id","from","to","reason","artifacts","created_at"]},
+    {"id":"nexus.denial.v1","purpose":"Machine-readable refusal/denial receipt for unsafe or unauthorized action","required":["schema","request_id","component","code","message","policy_id","created_at"]},
+    {"id":"nexus.release-evidence.v1","purpose":"Describe source/test/package/deploy evidence for a release claim","required":["schema","component","version","evidence","truth_state","created_at"]}
+  ]
+}
