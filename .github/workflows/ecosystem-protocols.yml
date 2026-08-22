@@ -25,6 +25,9 @@ jobs:
       - name: Validate operator routing and plan compiler
         working-directory: tools
         run: python test_ecosystemctl.py
+      - name: Validate generic protocol runtime
+        working-directory: tools
+        run: python test_protocol_runtime.py
 
   legacy-mdfuc:
     runs-on: ubuntu-latest
