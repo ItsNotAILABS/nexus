@@ -20,3 +20,5 @@ jobs:
         run: python tools/validate_mdfuc_catalog.py
       - name: Validate ecosystem protocol registry
         run: python tools/validate_ecosystem_protocols.py
+      - name: Validate ecosystem federation registry
+        run: python tools/validate_ecosystem_registry.py
