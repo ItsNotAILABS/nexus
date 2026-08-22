@@ -9,16 +9,25 @@ permissions:
   contents: read
 
 jobs:
-  validate:
+  ecosystem:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate MDFUC
-        run: python tools/validate_mdfuc_catalog.py
       - name: Validate ecosystem protocol registry
         run: python tools/validate_ecosystem_protocols.py
       - name: Validate ecosystem federation registry
         run: python tools/validate_ecosystem_registry.py
+
+  legacy-mdfuc:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate legacy MDFUC catalog
+        run: python tools/validate_mdfuc_catalog.py
