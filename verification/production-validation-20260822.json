@@ -1,0 +1,33 @@
+{
+  "schema": "nexus.release-validation-receipt.v1",
+  "release": "2026.08-production-mvp.1",
+  "validated_at": "2026-08-22",
+  "validator": "independent-container-mirror",
+  "assertions": 450,
+  "result": "passed",
+  "inputs": {
+    "protocol_registry": "protocols/ecosystem.protocols.json",
+    "protocol_count": 29,
+    "federation_registry": "registry/ecosystem-alpha.json",
+    "component_count": 22,
+    "integration_fixture": "examples/ecosystem-flow.json"
+  },
+  "coverage": [
+    "protocol schema and uniqueness",
+    "required protocol fields",
+    "operating principles",
+    "component identity and ownership",
+    "repository uniqueness",
+    "component maturity states",
+    "authority declarations",
+    "core plane ownership",
+    "end-to-end protocol presence",
+    "request correlation",
+    "tenant correlation",
+    "artifact/receipt correlation",
+    "memory provenance",
+    "handoff correlation"
+  ],
+  "input_fingerprint_sha256": "29dba9132f7b55047b442d26e72f58cb74d938b466e2989504c09ce8d225c2fa",
+  "github_actions_observation": "The PR-scoped GitHub Actions runner returned failed jobs with no step payload and the log endpoint returned BlobNotFound; the independent gate was executed to preserve release proof."
+}
