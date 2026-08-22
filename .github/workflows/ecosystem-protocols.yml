@@ -1,8 +1,8 @@
-name: Ecosystem Protocols
+name: Ecosystem Production Gate
 
 on:
   push:
-    branches: [main, ecosystem-alpha-intelligence-v1]
+    branches: [main]
   pull_request:
 
 permissions:
@@ -28,6 +28,8 @@ jobs:
       - name: Validate generic protocol runtime
         working-directory: tools
         run: python test_protocol_runtime.py
+      - name: Run 100+ assertion production gate
+        run: python tools/production_gate.py
 
   legacy-mdfuc:
     runs-on: ubuntu-latest
