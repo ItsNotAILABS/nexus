@@ -20,6 +20,8 @@ jobs:
         run: python tools/validate_ecosystem_protocols.py
       - name: Validate ecosystem federation registry
         run: python tools/validate_ecosystem_registry.py
+      - name: Validate end-to-end protocol fixture
+        run: python tools/validate_ecosystem_flow.py
 
   legacy-mdfuc:
     runs-on: ubuntu-latest
