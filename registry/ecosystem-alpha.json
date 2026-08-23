@@ -1,8 +1,9 @@
 {
   "schema": "nexus.ecosystem-registry.v1",
-  "version": "2026.08-alpha.1",
+  "version": "2026.08-production.1",
   "authority": "ItsNotAILABS/nexus",
   "protocol_registry": "protocols/ecosystem.protocols.json",
+  "production_nodes": "registry/production-nodes.json",
   "components": [
     {"repo":"ItsNotAILABS/nexus","component":"nexus","plane":"federation","status":"active","authority":["registry","protocols","compatibility"]},
     {"repo":"ItsNotAILABS/pocket","component":"pocket","plane":"user-team-policy","status":"active","authority":["identity","tenant","routing","rbac","device","product-host"]},
@@ -16,16 +17,16 @@
     {"repo":"ItsNotAILABS/CAPSULA","component":"capsula","plane":"execution-capsule","status":"protocol-ready","authority":["runtime-session","preview","wasm-plan","deploy-plan"]},
     {"repo":"ItsNotAILABS/MedinaMemorySystems","component":"medina-memory-systems","plane":"memory","status":"protocol-ready","authority":["memory-event","context-pack","team-vault"]},
     {"repo":"ItsNotAILABS/AURO","component":"auro-mesie-runtime","plane":"model","status":"protocol-ready","authority":["spectral-inference","embedding","model-benchmark"]},
-    {"repo":"ItsNotAILABS/Auro14B","component":"auro14b","plane":"model","status":"activation-candidate","authority":["language-model-runtime"]},
-    {"repo":"ItsNotAILABS/nova-connector-control-plane","component":"nova-connector-control-plane","plane":"connector","status":"activation-candidate","authority":["connector-runtime","connectorctl"]},
-    {"repo":"ItsNotAILABS/containers-nova-APPS","component":"nova-app-containers","plane":"deployment","status":"activation-candidate","authority":["container-runtime","app-deployment"]},
-    {"repo":"ItsNotAILABS/PhoneAI","component":"phone-ai","plane":"device-control","status":"activation-candidate","authority":["mobile-control","device-bridge"]},
-    {"repo":"ItsNotAILABS/ResearchersHub","component":"researchers-hub","plane":"research","status":"activation-candidate","authority":["research-artifact","publication-workflow"]},
-    {"repo":"ItsNotAILABS/CyberSecurity-AI","component":"cybersecurity-ai","plane":"security","status":"activation-candidate","authority":["security-analysis","threat-receipt"]},
-    {"repo":"ItsNotAILABS/Chimeria","component":"chimeria","plane":"synthetic-cognition","status":"activation-candidate","authority":["entity-runtime","state-continuity"]},
-    {"repo":"ItsNotAILABS/PARRALAX-AIHFTFUND","component":"parralax","plane":"market-execution","status":"activation-candidate","authority":["verifiable-execution","compute-receipts","coordination"]},
-    {"repo":"ItsNotAILABS/PARALLAX-Exchange-Clearinghouse","component":"parallax-clearinghouse","plane":"clearing","status":"activation-candidate","authority":["machine-checkable-netting","clearing-receipts"]},
-    {"repo":"ItsNotAILABS/sovereign-forge-os","component":"sovereign-forge-os","plane":"builder","status":"activation-candidate","authority":["forge-runtime","builder-control"]}
+    {"repo":"ItsNotAILABS/Auro14B","component":"auro14b","plane":"model","status":"protocol-ready","authority":["language-model-runtime","checkpoint-custody","browser-intelligence"]},
+    {"repo":"ItsNotAILABS/nova-connector-control-plane","component":"nova-connector-control-plane","plane":"connector","status":"protocol-ready","authority":["connector-runtime","connectorctl"]},
+    {"repo":"ItsNotAILABS/containers-nova-APPS","component":"nova-app-containers","plane":"deployment","status":"protocol-ready","authority":["container-runtime","app-deployment","durable-nova-chat"]},
+    {"repo":"ItsNotAILABS/PhoneAI","component":"phone-ai","plane":"device-control","status":"protocol-ready","authority":["mobile-control","device-bridge","secure-repo-bridge"]},
+    {"repo":"ItsNotAILABS/ResearchersHub","component":"researchers-hub","plane":"research","status":"protocol-ready","authority":["research-artifact","publication-workflow"]},
+    {"repo":"ItsNotAILABS/CyberSecurity-AI","component":"cybersecurity-ai","plane":"security","status":"protocol-ready","authority":["security-analysis","threat-receipt"]},
+    {"repo":"ItsNotAILABS/Chimeria","component":"chimeria","plane":"synthetic-cognition","status":"protocol-ready","authority":["entity-runtime","state-continuity","simulation-policy"]},
+    {"repo":"ItsNotAILABS/PARRALAX-AIHFTFUND","component":"parralax","plane":"market-execution","status":"protocol-ready","authority":["verifiable-execution","wallet-ledger","reconciliation","compute-receipts","coordination"]},
+    {"repo":"ItsNotAILABS/PARALLAX-Exchange-Clearinghouse","component":"parallax-clearinghouse","plane":"clearing","status":"protocol-ready","authority":["machine-checkable-netting","clearing-receipts"]},
+    {"repo":"ItsNotAILABS/sovereign-forge-os","component":"sovereign-forge-os","plane":"builder","status":"protocol-ready","authority":["forge-runtime","builder-control"]}
   ],
   "forbidden_authority_merges": [
     ["pocket-voice","identity"],
@@ -35,7 +36,6 @@
     ["memory-plane","cross-tenant-recall"]
   ],
   "promotion_rules": {
-    "activation-candidate_to_protocol-ready": ["ecosystem.surface.json","protocol compatibility declaration","security boundary","validation command"],
-    "protocol-ready_to_active": ["green CI","one reproducible end-to-end task","receipt evidence","failure/denial test","operator documentation"]
+    "protocol-ready_to_active": ["green CI or equivalent signed validation receipt","one reproducible end-to-end task","receipt evidence","failure/denial test","operator documentation"]
   }
 }
