@@ -36,6 +36,7 @@
     ["memory-plane","cross-tenant-recall"]
   ],
   "promotion_rules": {
+    "activation-candidate_to_protocol-ready": ["ecosystem.surface.json","protocol compatibility declaration","security boundary","validation command"],
     "protocol-ready_to_active": ["green CI or equivalent signed validation receipt","one reproducible end-to-end task","receipt evidence","failure/denial test","operator documentation"]
   }
 }
