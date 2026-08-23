@@ -20,6 +20,8 @@ jobs:
         run: python tools/validate_ecosystem_protocols.py
       - name: Validate ecosystem federation registry
         run: python tools/validate_ecosystem_registry.py
+      - name: Validate all registered production nodes
+        run: python tools/validate_production_nodes.py
       - name: Validate end-to-end protocol fixture
         run: python tools/validate_ecosystem_flow.py
       - name: Validate operator routing and plan compiler
