@@ -1,6 +1,6 @@
 {
   "schema": "nexus.ecosystem-protocol-registry.v1",
-  "version": "1.2.0-alpha.1",
+  "version": "2.1.0",
   "authority": "ItsNotAILABS/nexus",
   "principles": [
     "provider-neutral",
@@ -43,6 +43,17 @@
     {"id":"nexus.telemetry.v1","purpose":"Emit privacy-bounded metrics and traces with request correlation","required":["schema","component","request_id","metrics","observed_at"]},
     {"id":"nexus.compatibility.v1","purpose":"Declare protocol versions produced and consumed plus minimum compatible versions","required":["schema","component","produces","consumes","minimums"]},
     {"id":"nexus.handoff.v1","purpose":"Transfer responsibility between components with explicit next owner and evidence","required":["schema","request_id","from","to","reason","artifacts","created_at"]},
-    {"id":"nexus.release-evidence.v1","purpose":"Describe source, test, package, preview and deploy evidence for a release claim","required":["schema","component","version","evidence","truth_state","created_at"]}
+    {"id":"nexus.release-evidence.v1","purpose":"Describe source, test, package, preview and deploy evidence for a release claim","required":["schema","component","version","evidence","truth_state","created_at"]},
+    {"id":"nexus.device-federation.v1","purpose":"Register user-owned execution devices as distinct principals with bounded capabilities, trust, availability and scheduling policy","required":["schema","federation_id","owner","devices","scheduling_policy","created_at"]},
+    {"id":"nexus.runtime-cell.v1","purpose":"Describe an approval-bound agent sandbox, app bottle or mini OS with explicit policy, resources, identity and lifecycle","required":["schema","cell_id","runtime_class","principal","policy_hash","state","created_at"]},
+    {"id":"nexus.evidence-classification.v1","purpose":"Classify a claim against the minimum required and observed evidence classes E0 through E5","required":["schema","claim_id","required_class","observed_class","evidence","decision","observed_at"]},
+    {"id":"nexus.model-council.v1","purpose":"Coordinate a parent model, specialist models and atomic task capsules while preserving disagreement and evidence","required":["schema","council_id","parent_model","specialists","task_capsules","consensus","receipt"]},
+    {"id":"nexus.continuity-snapshot.v1","purpose":"Record longitudinal artificial-identity continuity across checkpoint, memory, relationship, tool and constitutional dimensions","required":["schema","subject_id","checkpoint_id","memory_classes","observations","receipt","created_at"]},
+    {"id":"nexus.sovereignty-profile.v1","purpose":"Measure local execution, exportability, provider replaceability, transparency, recovery and dependency burden","required":["schema","subject","dimensions","scores","evidence","observed_at"]},
+    {"id":"nexus.capability-offer.v1","purpose":"Describe an installable or hosted agent capability with permissions, runtime, version, evidence obligations, pricing or quota and rollback","required":["schema","offer_id","capability","version","permissions","runtime","evidence","commercial_terms","rollback"]},
+    {"id":"nexus.emergence-observation.v1","purpose":"Record bounded longitudinal observations of recurrent synthetic systems without converting novelty into unsupported consciousness claims","required":["schema","observation_id","subject","window","subsystems","recurrence","consequences","novelty","evidence"]},
+    {"id":"pocket.triform-product.v1","purpose":"Coordinate an independent cloud account, installable desktop runtime and Edge application as three bodies of one product","required":["schema","product_id","bodies","state_ownership","synchronization","availability","evidence"]},
+    {"id":"pocket.voice-state.v1","purpose":"Carry consent-aware speech perception, dialogue timing, prosody, interruption and output state without conflating voice with the language model","required":["schema","session_id","principal","consent","input_state","dialogue_state","output_state","observed_at"]},
+    {"id":"auro.model-family.v2","purpose":"Describe the AURO capacity ladder, capability axis, atomic composition, specialist triad and exact-checkpoint evidence boundaries","required":["schema","family_id","lanes","capabilities","composition","claim_boundaries","version"]}
   ]
 }
