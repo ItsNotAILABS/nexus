@@ -1,0 +1,188 @@
+{
+  "schema": "medina.corpus-architectura.v2",
+  "corpus_id": "Corpus-de-Architectura-Intelligentiae-Sui-Iuris",
+  "version": "2.1.0",
+  "authority": "ItsNotAILABS/nexus",
+  "author": {
+    "name": "Alfredo Medina",
+    "affiliations": [
+      "ItsNotAI Labs",
+      "Medina Tech Labs",
+      "Resource Hub Think Tank"
+    ]
+  },
+  "publication": {
+    "volumes": {
+      "I": {
+        "paper_numbers": [1, 4, 7, 8, 9]
+      },
+      "II": {
+        "paper_numbers": [2, 3, 5, 6, 10, 11, 12, 13]
+      }
+    },
+    "paper_count": 13,
+    "status": "full-conceptual-systems-research-series",
+    "empirical_boundary": "Methods, architectures, and falsifiable evaluations are specified; unexecuted experiments are not represented as measured results."
+  },
+  "papers": [
+    {
+      "number": 1,
+      "id": "tres-formae-una-mens",
+      "latin_title": "Tres Formae, Una Mens",
+      "english_title": "Three Forms, One Mind: A Triform Architecture for Persistent AI Products",
+      "volume": "I",
+      "primary_contracts": ["pocket.triform-product.v1", "nexus.identity-ref.v1", "nexus.device-federation.v1"],
+      "authority_repositories": ["ItsNotAILABS/pocket", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "Cloud, desktop, and Edge are coordinated product bodies; source presence alone does not prove a live cloud deployment or distributable installer."
+    },
+    {
+      "number": 2,
+      "id": "nubes-perennis-corpus-intermittens",
+      "latin_title": "Nubes Perennis, Corpus Intermittens",
+      "english_title": "The Persistent Cloud and the Intermittent Body",
+      "volume": "II",
+      "primary_contracts": ["nexus.job.v1", "nexus.lease.v1", "nexus.device-federation.v1"],
+      "authority_repositories": ["ItsNotAILABS/pocket", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "The cloud may preserve identity, queues, and coordination while devices are offline; it may not claim local execution without returned evidence."
+    },
+    {
+      "number": 3,
+      "id": "computatio-sui-iuris",
+      "latin_title": "Computatio Sui Iuris",
+      "english_title": "Sovereign Computation as a Product Architecture",
+      "volume": "II",
+      "primary_contracts": ["nexus.sovereignty-profile.v1", "nexus.artifact.v1", "nexus.release-evidence.v1"],
+      "authority_repositories": ["ItsNotAILABS/pocket", "ItsNotAILABS/AURO", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "Sovereignty is measured through local execution, exportability, replaceability, transparency, and recovery; it is not established by branding."
+    },
+    {
+      "number": 4,
+      "id": "identitas-potestas-et-fines",
+      "latin_title": "Identitas, Potestas, et Fines",
+      "english_title": "Identity, Authority, and Boundaries in Multi-User Agent Systems",
+      "volume": "I",
+      "primary_contracts": ["nexus.identity-ref.v1", "nexus.approval.v1", "nexus.policy-decision.v1"],
+      "authority_repositories": ["ItsNotAILABS/pocket", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "Humans, organizations, agents, models, devices, API clients, and runtime cells are distinct principals; delegated authority must be attenuated and revocable."
+    },
+    {
+      "number": 5,
+      "id": "foedus-machinarum",
+      "latin_title": "Foedus Machinarum",
+      "english_title": "A Federation of Machines for User-Owned Agent Execution",
+      "volume": "II",
+      "primary_contracts": ["nexus.device-federation.v1", "nexus.capability.v1", "nexus.task.v1"],
+      "authority_repositories": ["ItsNotAILABS/pocket", "ItsNotAILABS/AURO", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "Paired devices advertise bounded capabilities and remain separate principals; federation is not unrestricted remote control."
+    },
+    {
+      "number": 6,
+      "id": "agentes-sub-lege",
+      "latin_title": "Agentes Sub Lege",
+      "english_title": "Agents Under Law: Governed Computer Access for Autonomous Systems",
+      "volume": "II",
+      "primary_contracts": ["nexus.runtime-cell.v1", "nexus.approval.v1", "nexus.execution-receipt.v1"],
+      "authority_repositories": ["ItsNotAILABS/pocket", "ItsNotAILABS/nexus", "ItsNotAILABS/nova-intelligence"],
+      "implementation_boundary": "Agents may discover, plan, and propose; consequential execution requires exact action-bound authority and post-action validation."
+    },
+    {
+      "number": 7,
+      "id": "consensus-ex-minimis",
+      "latin_title": "Consensus ex Minimis",
+      "english_title": "Consensus from the Smallest: Hierarchical Atomic Models as Internal Cognitive Labor",
+      "volume": "I",
+      "primary_contracts": ["auro.model-family.v2", "nexus.model-council.v1", "nexus.context-pack.v1"],
+      "authority_repositories": ["ItsNotAILABS/Auro14B", "ItsNotAILABS/AURO", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "Atomic lanes, specialist identities, and council routing are architecture and runtime contracts until exact promoted checkpoints and evaluations exist."
+    },
+    {
+      "number": 8,
+      "id": "memoria-viva-et-continuatio",
+      "latin_title": "Memoria Viva et Continuatio",
+      "english_title": "Living Memory and the Continuity of Artificial Identity",
+      "volume": "I",
+      "primary_contracts": ["nexus.memory-event.v1", "nexus.continuity-snapshot.v1", "nexus.retention-policy.v1"],
+      "authority_repositories": ["ItsNotAILABS/Auro14B", "ItsNotAILABS/nova-intelligence", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "Same-session recall is not durable memory, and a reused model name is not identity continuity; longitudinal evidence is required."
+    },
+    {
+      "number": 9,
+      "id": "probatio-ante-assertionem",
+      "latin_title": "Probatio Ante Assertionem",
+      "english_title": "Proof Before Assertion: Evidence-Native AI Operations",
+      "volume": "I",
+      "primary_contracts": ["nexus.evidence-classification.v1", "nexus.execution-receipt.v1", "nexus.release-evidence.v1"],
+      "authority_repositories": ["ItsNotAILABS/nexus", "ItsNotAILABS/Auro14B", "ItsNotAILABS/pocket"],
+      "implementation_boundary": "Claims must be supported by the evidence class they require; local unkeyed hashes do not establish external custody."
+    },
+    {
+      "number": 10,
+      "id": "mercatus-facultatum-agentium",
+      "latin_title": "Mercatus Facultatum Agentium",
+      "english_title": "The Market of Agent Capabilities",
+      "volume": "II",
+      "primary_contracts": ["nexus.capability-offer.v1", "nexus.quota.v1", "nexus.compatibility.v1"],
+      "authority_repositories": ["ItsNotAILABS/nexus", "ItsNotAILABS/pocket"],
+      "implementation_boundary": "Marketable capabilities require explicit permissions, versions, prices or quotas, evidence obligations, runtimes, and rollback behavior."
+    },
+    {
+      "number": 11,
+      "id": "vox-corpus-mens",
+      "latin_title": "Vox, Corpus, Mens",
+      "english_title": "Voice, Body, and Mind: Toward Native Conversational Embodiment",
+      "volume": "II",
+      "primary_contracts": ["pocket.voice-state.v1", "nexus.identity-ref.v1", "nexus.telemetry.v1"],
+      "authority_repositories": ["ItsNotAILABS/pocket-voice-to-text", "ItsNotAILABS/pocket", "ItsNotAILABS/Auro14B"],
+      "implementation_boundary": "A voice stack is not proven expressive or low-latency until exact model, hardware, consent, and benchmark evidence exists."
+    },
+    {
+      "number": 12,
+      "id": "civitas-intelligentiarum",
+      "latin_title": "Civitas Intelligentiarum",
+      "english_title": "A Commonwealth of Intelligences: The AI-Native Organization as a Living System",
+      "volume": "II",
+      "primary_contracts": ["nexus.ecosystem-registry.v1", "nexus.handoff.v1", "nexus.audit-event.v1"],
+      "authority_repositories": ["ItsNotAILABS/nexus", "ItsNotAILABS/pocket", "ItsNotAILABS/Auro14B"],
+      "implementation_boundary": "Organizational intelligence must preserve human agency and distinguish proposals, approvals, executions, validations, and outcomes."
+    },
+    {
+      "number": 13,
+      "id": "emergentia-gubernata",
+      "latin_title": "Emergentia Gubernata",
+      "english_title": "Governed Emergence in Synthetic Cognitive Systems",
+      "volume": "II",
+      "primary_contracts": ["nexus.emergence-observation.v1", "nexus.policy-decision.v1", "nexus.continuity-snapshot.v1"],
+      "authority_repositories": ["ItsNotAILABS/Auro14B", "ItsNotAILABS/nova-intelligence", "ItsNotAILABS/nexus"],
+      "implementation_boundary": "Emergence is an observed longitudinal property under bounded recurrence and consequence, not an anthropomorphic label or scripted role."
+    }
+  ],
+  "system_invariants": {
+    "product_bodies": ["cloud-account", "desktop-runtime", "edge-app"],
+    "principal_types": ["human", "organization", "agent", "model", "device", "api-client", "runtime-cell"],
+    "execution_sequence": ["discover", "classify-risk", "plan", "approve", "execute", "validate", "receipt"],
+    "runtime_cells": ["agent-sandbox", "app-bottle", "mini-os"],
+    "auro_family_lanes": ["Auro-156K", "Auro-250M", "Auro-500M", "Auro-2B", "Auro-4B", "Auro-8B", "Auro-14B", "Auro-100B"],
+    "auro_2b_specialist_triad": ["Auro-500M-SENSUS", "Auro-500M-PRAXIS", "Auro-500M-VERBUM"],
+    "memory_classes": ["weights", "working", "episodic", "semantic", "procedural", "relational", "identity"],
+    "evidence_classes": ["E0-assertion", "E1-source", "E2-execution-log", "E3-validated-output", "E4-signed-receipt", "E5-external-custody-and-reproduction"],
+    "sovereignty_dimensions": ["local-execution", "exportability", "provider-replaceability", "execution-transparency", "recovery", "dependency-burden"]
+  },
+  "claim_boundaries": [
+    "architecture-configuration-is-not-a-trained-checkpoint",
+    "accepted-context-is-not-dense-attention",
+    "named-agent-is-not-a-separately-trained-model",
+    "source-code-is-not-deployment-evidence",
+    "local-hash-chain-is-not-external-custody",
+    "same-session-recall-is-not-persistent-memory",
+    "successful-build-is-not-clean-install-proof",
+    "generated-answer-is-not-experimental-validation"
+  ],
+  "implementation_roots": {
+    "ItsNotAILABS/nexus": "protocol authority, evidence classes, ecosystem registry, compatibility and handoff",
+    "ItsNotAILABS/pocket": "triform product, identity, organizations, devices, product surfaces and governed routing",
+    "ItsNotAILABS/Auro14B": "model-family, atomic lanes, councils, continuity, checkpoint custody and model evidence",
+    "ItsNotAILABS/AURO": "MESIE-backed spectral runtime, embeddings, bounded inference and model compute",
+    "ItsNotAILABS/nova-intelligence": "intelligence contracts, research index, compatibility review and evidence classification"
+  },
+  "content_sha256": "c75ee90a358507652bfcec468649277c348b8bd4d8d28b99a5c5e0fd46905a12"
+}

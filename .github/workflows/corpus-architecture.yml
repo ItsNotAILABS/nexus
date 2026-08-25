@@ -1,0 +1,41 @@
+name: Corpus Architecture Gate
+
+on:
+  pull_request:
+    paths:
+      - 'research/corpus-architectura-v2.1.json'
+      - 'protocols/ecosystem.protocols.json'
+      - 'registry/ecosystem-alpha.json'
+      - 'tools/validate_corpus_architecture.py'
+      - 'docs/CORPUS_ARCHITECTURE_ALIGNMENT.md'
+      - '.github/workflows/corpus-architecture.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'research/corpus-architectura-v2.1.json'
+      - 'protocols/ecosystem.protocols.json'
+      - 'registry/ecosystem-alpha.json'
+      - 'tools/validate_corpus_architecture.py'
+      - '.github/workflows/corpus-architecture.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile validator
+        run: python -m py_compile tools/validate_corpus_architecture.py
+      - name: Validate paper-to-code alignment
+        run: python tools/validate_corpus_architecture.py | tee corpus-validation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: corpus-architecture-validation
+          path: corpus-validation.json
+          if-no-files-found: error
