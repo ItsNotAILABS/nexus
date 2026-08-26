@@ -1,0 +1,26 @@
+name: System Reconciliation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate ecosystem registry
+        run: python tools/validate_ecosystem_registry.py
+      - name: Validate production catalog
+        run: python tools/production_gate.py
+      - name: Validate system reconciliation
+        run: python tools/validate_system_reconciliation.py
+      - name: Print reconciliation summary
+        run: python tools/reconcile_ecosystem.py summary
