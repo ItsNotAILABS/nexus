@@ -1,14 +1,16 @@
 {
   "schema": "nexus.ecosystem-registry.v1",
-  "version": "2026.08-production.1",
+  "version": "2026.08-production.2",
   "authority": "ItsNotAILABS/nexus",
   "protocol_registry": "protocols/ecosystem.protocols.json",
   "production_nodes": "registry/production-nodes.json",
+  "reconciliation_registry": "registry/system-reconciliation.json",
   "components": [
     {"repo":"ItsNotAILABS/nexus","component":"nexus","plane":"federation","status":"active","authority":["registry","protocols","compatibility"]},
     {"repo":"ItsNotAILABS/pocket","component":"pocket","plane":"user-team-policy","status":"active","authority":["identity","tenant","routing","rbac","device","product-host"]},
     {"repo":"ItsNotAILABS/pocket-agent","component":"pocket-agent","plane":"execution","status":"active","authority":["long-running-agent","rah","schedule","capsule-dispatch","execution-receipt"]},
     {"repo":"ItsNotAILABS/pocket-voice-to-text","component":"pocket-voice","plane":"voice-conversation","status":"active","authority":["turn-timing","vad-stt","voice-context","studio-contract"]},
+    {"repo":"ItsNotAILABS/CapsulaBuilder","component":"monadbuilder-thesis","plane":"product-control","status":"protocol-ready","authority":["monadbuilder-web","thesis-desktop","mcp-spine-integration","owner-approval-ux","receipt-ux","product-orchestration"]},
     {"repo":"ItsNotAILABS/nova-intelligence","component":"nova-intelligence","plane":"intelligence-contract","status":"protocol-ready","authority":["runtime-contracts","research-proof","compatibility-review"]},
     {"repo":"ItsNotAILABS/PhantomSDK","component":"phantom-sdk","plane":"sdk","status":"protocol-ready","authority":["external-sdk","schema-clients","release-verification"]},
     {"repo":"ItsNotAILABS/x-mcp-skills","component":"x-mcp-skills","plane":"connector","status":"protocol-ready","authority":["external-ai-connectors","discovery","artifact-handoff"]},
@@ -33,7 +35,9 @@
     ["pocket-agent","tenant-billing"],
     ["external-connector","trunk-authority"],
     ["model-runtime","policy-authority"],
-    ["memory-plane","cross-tenant-recall"]
+    ["memory-plane","cross-tenant-recall"],
+    ["product-surface","upstream-canonical-authority"],
+    ["monadbuilder-thesis","wallet-signing-authority"]
   ],
   "promotion_rules": {
     "activation-candidate_to_protocol-ready": ["ecosystem.surface.json","protocol compatibility declaration","security boundary","validation command"],
