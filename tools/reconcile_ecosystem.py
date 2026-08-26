@@ -22,7 +22,7 @@ def classes(value) -> list[str]:
     return [value] if isinstance(value, str) else list(value or [])
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="reconcile-ecosystem")
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -37,18 +37,15 @@ def main() -> int:
     dp = sub.add_parser("describe")
     dp.add_argument("name")
 
+    args = parser.parse_args(argv)
     data = load()
-
-    if args := None:
-        pass
-    args = parser.parse_args()
 
     if args.command == "summary":
         decisions = data.get("repository_decisions") or []
-        counts = {}
+        counts: dict[str, int] = {}
         for item in decisions:
-            for c in classes(item.get("classification")):
-                counts[c] = counts.get(c, 0) + 1
+            for classification in classes(item.get("classification")):
+                counts[classification] = counts.get(classification, 0) + 1
         emit({
             "schema": data.get("schema"),
             "version": data.get("version"),
@@ -76,7 +73,7 @@ def main() -> int:
     if args.command == "repos":
         rows = data.get("repository_decisions") or []
         if args.classification:
-            rows = [r for r in rows if args.classification in classes(r.get("classification"))]
+            rows = [row for row in rows if args.classification in classes(row.get("classification"))]
         emit(rows)
         return 0
 
