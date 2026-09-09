@@ -1,0 +1,58 @@
+{
+  "schema": "nexus.protocol-extension.v1",
+  "extension_id": "pocket.channel-federation.v2",
+  "authority": "ItsNotAILABS/nexus",
+  "protocols": [
+    {
+      "id": "pocket.doctrine-laws.v2",
+      "purpose": "Declare executable cross-plane laws for continuity, authority, time, replay safety, capability disclosure, intent preservation, proof convergence and failover",
+      "required": ["schema", "authority", "laws", "count", "claims_boundary"]
+    },
+    {
+      "id": "pocket.channel-envelope.v2",
+      "purpose": "Carry causally addressed agent/model/voice/device/proof messages with logical HZ semantics, freshness, consequence and capability disclosure",
+      "required": ["schema", "message_id", "request_id", "from", "to", "channel", "logical_hz", "kind", "state", "created_at", "expires_at", "owner"]
+    },
+    {
+      "id": "auro.pocket-channel-contract.v2",
+      "purpose": "Bind AURO/MESIE compute into POCKET logical model, intel, proof and recovery channels while preserving the physical-Hz boundary and no-side-effect authority",
+      "required": ["schema", "pocket_envelope", "pocket_doctrine", "channels", "physical_hz_model", "logical_hz_model", "authority", "capability_descriptor"]
+    },
+    {
+      "id": "auro.execution-receipt.v2",
+      "purpose": "Correlate bounded AURO/MESIE compute evidence with request identity without granting authorization authority",
+      "required": ["schema", "action", "ok", "runtime", "version", "created_at", "evidence_digest", "request_id"]
+    }
+  ],
+  "logical_channels": {
+    "0": "user",
+    "1": "heartbeat",
+    "2": "design",
+    "3": "security",
+    "4": "ship",
+    "5": "intel",
+    "6": "model",
+    "7": "memory",
+    "8": "proof",
+    "9": "voice",
+    "10": "deploy",
+    "11": "recovery"
+  },
+  "federation_rules": [
+    "request identity survives every transport hop",
+    "logical HZ is semantic/cadence metadata and not a physical RF claim",
+    "model or scientific compute never creates external-side-effect authority",
+    "side-effecting consumers require approval and replay-safety semantics",
+    "success requiring evidence is not verified until execution and proof converge",
+    "transport failover preserves envelope identity and discloses changed trust/privacy/durability semantics"
+  ],
+  "compatible_transports": ["in-process", "mesh-disk", "http", "mcp", "websocket", "device-bridge"],
+  "components": {
+    "POCKET": ["user", "voice", "model", "memory", "proof", "deploy", "recovery"],
+    "POCKET Agent": ["user", "design", "model", "memory", "proof", "recovery"],
+    "Pocket Voice": ["voice", "user", "proof"],
+    "AURO/MESIE": ["intel", "model", "proof", "recovery"],
+    "NEXUS": ["user", "security", "proof", "recovery"]
+  },
+  "claim_boundary": "This extension defines interoperability contracts and authority boundaries. It does not prove every listed transport adapter or component path is deployed end-to-end."
+}
