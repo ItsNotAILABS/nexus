@@ -1,6 +1,6 @@
 {
   "schema": "nexus.ecosystem-registry.v1",
-  "version": "2026.08-production-corpus-2.1",
+  "version": "2026.10-context-fabric-2.2",
   "authority": "ItsNotAILABS/nexus",
   "protocol_registry": "protocols/ecosystem.protocols.json",
   "production_nodes": "registry/production-nodes.json",
@@ -14,39 +14,354 @@
     "binding_rule": "repository implementations may specialize contracts but must preserve claim boundaries and protocol compatibility"
   },
   "components": [
-    {"repo":"ItsNotAILABS/nexus","component":"nexus","plane":"federation","status":"active","authority":["registry","protocols","compatibility","research-corpus","evidence-classification","device-federation","runtime-cell-contracts"]},
-    {"repo":"ItsNotAILABS/pocket","component":"pocket","plane":"user-team-policy","status":"active","authority":["identity","tenant","routing","rbac","device","product-host","triform-product","organization-identity","device-federation","capability-market"]},
-    {"repo":"ItsNotAILABS/pocket-agent","component":"pocket-agent","plane":"execution","status":"active","authority":["long-running-agent","rah","schedule","capsule-dispatch","execution-receipt","runtime-cells","approval-bound-execution","lease-recovery"]},
-    {"repo":"ItsNotAILABS/pocket-voice-to-text","component":"pocket-voice","plane":"voice-conversation","status":"active","authority":["turn-timing","vad-stt","voice-context","studio-contract","voice-state","consent","turn-taking","prosody-contract"]},
-    {"repo":"ItsNotAILABS/nova-intelligence","component":"nova-intelligence","plane":"intelligence-contract","status":"protocol-ready","authority":["runtime-contracts","research-proof","compatibility-review","corpus-research-index","evidence-classification","continuity-review","emergence-review"]},
-    {"repo":"ItsNotAILABS/PhantomSDK","component":"phantom-sdk","plane":"sdk","status":"protocol-ready","authority":["external-sdk","schema-clients","release-verification"]},
-    {"repo":"ItsNotAILABS/x-mcp-skills","component":"x-mcp-skills","plane":"connector","status":"protocol-ready","authority":["external-ai-connectors","discovery","artifact-handoff"]},
-    {"repo":"ItsNotAILABS/organism-bots-mcp-server","component":"organism-bots","plane":"workflow","status":"protocol-ready","authority":["bot-registry","workflow-routing","task-receipts"]},
-    {"repo":"ItsNotAILABS/MatDaemon","component":"matdaemon","plane":"compute","status":"protocol-ready","authority":["matrix-compute","bounded-training","compute-benchmark"]},
-    {"repo":"ItsNotAILABS/CAPSULA","component":"capsula","plane":"execution-capsule","status":"protocol-ready","authority":["runtime-session","preview","wasm-plan","deploy-plan"]},
-    {"repo":"ItsNotAILABS/MedinaMemorySystems","component":"medina-memory-systems","plane":"memory","status":"protocol-ready","authority":["memory-event","context-pack","team-vault"]},
-    {"repo":"ItsNotAILABS/AURO","component":"auro-mesie-runtime","plane":"model","status":"protocol-ready","authority":["spectral-inference","embedding","model-benchmark","mesie-offload","sovereignty-profile","council-compute"]},
-    {"repo":"ItsNotAILABS/Auro14B","component":"auro14b","plane":"model","status":"protocol-ready","authority":["language-model-runtime","checkpoint-custody","browser-intelligence","atomic-model-family","model-council","continuity-snapshot"]},
-    {"repo":"ItsNotAILABS/nova-connector-control-plane","component":"nova-connector-control-plane","plane":"connector","status":"protocol-ready","authority":["connector-runtime","connectorctl"]},
-    {"repo":"ItsNotAILABS/containers-nova-APPS","component":"nova-app-containers","plane":"deployment","status":"protocol-ready","authority":["container-runtime","app-deployment","durable-nova-chat"]},
-    {"repo":"ItsNotAILABS/PhoneAI","component":"phone-ai","plane":"device-control","status":"protocol-ready","authority":["mobile-control","device-bridge","secure-repo-bridge"]},
-    {"repo":"ItsNotAILABS/ResearchersHub","component":"researchers-hub","plane":"research","status":"protocol-ready","authority":["research-artifact","publication-workflow"]},
-    {"repo":"ItsNotAILABS/CyberSecurity-AI","component":"cybersecurity-ai","plane":"security","status":"protocol-ready","authority":["security-analysis","threat-receipt"]},
-    {"repo":"ItsNotAILABS/Chimeria","component":"chimeria","plane":"synthetic-cognition","status":"protocol-ready","authority":["entity-runtime","state-continuity","simulation-policy"]},
-    {"repo":"ItsNotAILABS/PARRALAX-AIHFTFUND","component":"parralax","plane":"market-execution","status":"protocol-ready","authority":["verifiable-execution","wallet-ledger","reconciliation","compute-receipts","coordination"]},
-    {"repo":"ItsNotAILABS/PARALLAX-Exchange-Clearinghouse","component":"parallax-clearinghouse","plane":"clearing","status":"protocol-ready","authority":["machine-checkable-netting","clearing-receipts"]},
-    {"repo":"ItsNotAILABS/sovereign-forge-os","component":"sovereign-forge-os","plane":"builder","status":"protocol-ready","authority":["forge-runtime","builder-control"]}
+    {
+      "repo": "ItsNotAILABS/nexus",
+      "component": "nexus",
+      "plane": "federation",
+      "status": "active",
+      "authority": [
+        "registry",
+        "protocols",
+        "compatibility",
+        "research-corpus",
+        "evidence-classification",
+        "device-federation",
+        "runtime-cell-contracts"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/pocket",
+      "component": "pocket",
+      "plane": "user-team-policy",
+      "status": "active",
+      "authority": [
+        "identity",
+        "tenant",
+        "routing",
+        "rbac",
+        "device",
+        "product-host",
+        "triform-product",
+        "organization-identity",
+        "device-federation",
+        "capability-market"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/pocket-agent",
+      "component": "pocket-agent",
+      "plane": "execution",
+      "status": "active",
+      "authority": [
+        "long-running-agent",
+        "rah",
+        "schedule",
+        "capsule-dispatch",
+        "execution-receipt",
+        "runtime-cells",
+        "approval-bound-execution",
+        "lease-recovery"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/pocket-voice-to-text",
+      "component": "pocket-voice",
+      "plane": "voice-conversation",
+      "status": "active",
+      "authority": [
+        "turn-timing",
+        "vad-stt",
+        "voice-context",
+        "studio-contract",
+        "voice-state",
+        "consent",
+        "turn-taking",
+        "prosody-contract"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/nova-intelligence",
+      "component": "nova-intelligence",
+      "plane": "intelligence-contract",
+      "status": "protocol-ready",
+      "authority": [
+        "runtime-contracts",
+        "research-proof",
+        "compatibility-review",
+        "corpus-research-index",
+        "evidence-classification",
+        "continuity-review",
+        "emergence-review"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/PhantomSDK",
+      "component": "phantom-sdk",
+      "plane": "sdk",
+      "status": "protocol-ready",
+      "authority": [
+        "external-sdk",
+        "schema-clients",
+        "release-verification"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/x-mcp-skills",
+      "component": "x-mcp-skills",
+      "plane": "connector",
+      "status": "protocol-ready",
+      "authority": [
+        "external-ai-connectors",
+        "discovery",
+        "artifact-handoff"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/organism-bots-mcp-server",
+      "component": "organism-bots",
+      "plane": "workflow",
+      "status": "protocol-ready",
+      "authority": [
+        "bot-registry",
+        "workflow-routing",
+        "task-receipts"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/MatDaemon",
+      "component": "matdaemon",
+      "plane": "compute",
+      "status": "protocol-ready",
+      "authority": [
+        "matrix-compute",
+        "bounded-training",
+        "compute-benchmark"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/CAPSULA",
+      "component": "capsula",
+      "plane": "execution-capsule",
+      "status": "protocol-ready",
+      "authority": [
+        "runtime-session",
+        "preview",
+        "wasm-plan",
+        "deploy-plan"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/MedinaMemorySystems",
+      "component": "medina-memory-systems",
+      "plane": "memory",
+      "status": "protocol-ready",
+      "authority": [
+        "memory-event",
+        "context-pack",
+        "team-vault"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/AURO",
+      "component": "auro-mesie-runtime",
+      "plane": "model",
+      "status": "protocol-ready",
+      "authority": [
+        "spectral-inference",
+        "embedding",
+        "model-benchmark",
+        "mesie-offload",
+        "sovereignty-profile",
+        "council-compute"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/Auro14B",
+      "component": "auro14b",
+      "plane": "model",
+      "status": "protocol-ready",
+      "authority": [
+        "language-model-runtime",
+        "checkpoint-custody",
+        "browser-intelligence",
+        "atomic-model-family",
+        "model-council",
+        "continuity-snapshot"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/nova-connector-control-plane",
+      "component": "nova-connector-control-plane",
+      "plane": "connector",
+      "status": "protocol-ready",
+      "authority": [
+        "connector-runtime",
+        "connectorctl"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/containers-nova-APPS",
+      "component": "nova-app-containers",
+      "plane": "deployment",
+      "status": "protocol-ready",
+      "authority": [
+        "container-runtime",
+        "app-deployment",
+        "durable-nova-chat"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/PhoneAI",
+      "component": "phone-ai",
+      "plane": "device-control",
+      "status": "protocol-ready",
+      "authority": [
+        "mobile-control",
+        "device-bridge",
+        "secure-repo-bridge"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/ResearchersHub",
+      "component": "researchers-hub",
+      "plane": "research",
+      "status": "protocol-ready",
+      "authority": [
+        "research-artifact",
+        "publication-workflow"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/CyberSecurity-AI",
+      "component": "cybersecurity-ai",
+      "plane": "security",
+      "status": "protocol-ready",
+      "authority": [
+        "security-analysis",
+        "threat-receipt"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/Chimeria",
+      "component": "chimeria",
+      "plane": "synthetic-cognition",
+      "status": "protocol-ready",
+      "authority": [
+        "entity-runtime",
+        "state-continuity",
+        "simulation-policy"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/PARRALAX-AIHFTFUND",
+      "component": "parralax",
+      "plane": "market-execution",
+      "status": "protocol-ready",
+      "authority": [
+        "verifiable-execution",
+        "wallet-ledger",
+        "reconciliation",
+        "compute-receipts",
+        "coordination"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/PARALLAX-Exchange-Clearinghouse",
+      "component": "parallax-clearinghouse",
+      "plane": "clearing",
+      "status": "protocol-ready",
+      "authority": [
+        "machine-checkable-netting",
+        "clearing-receipts"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/sovereign-forge-os",
+      "component": "sovereign-forge-os",
+      "plane": "builder",
+      "status": "protocol-ready",
+      "authority": [
+        "forge-runtime",
+        "builder-control"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/KILN",
+      "component": "kiln",
+      "plane": "agent-workspace-execution",
+      "status": "protocol-ready",
+      "authority": [
+        "local-git",
+        "persistent-agent-nodes",
+        "capability-grants",
+        "signed-receipts",
+        "context-index",
+        "context-pack",
+        "context-delta",
+        "workspace-territory",
+        "promotion-evidence"
+      ]
+    },
+    {
+      "repo": "ItsNotAILABS/kiln-workspace",
+      "component": "kiln-workspace",
+      "plane": "user-team-artifact",
+      "status": "protocol-ready",
+      "authority": [
+        "repository-ux",
+        "github-import",
+        "local-context-bridge",
+        "workspace-visualization"
+      ]
+    }
   ],
   "forbidden_authority_merges": [
-    ["pocket-voice","identity"],
-    ["pocket-agent","tenant-billing"],
-    ["external-connector","trunk-authority"],
-    ["model-runtime","policy-authority"],
-    ["memory-plane","cross-tenant-recall"]
+    [
+      "pocket-voice",
+      "identity"
+    ],
+    [
+      "pocket-agent",
+      "tenant-billing"
+    ],
+    [
+      "external-connector",
+      "trunk-authority"
+    ],
+    [
+      "model-runtime",
+      "policy-authority"
+    ],
+    [
+      "memory-plane",
+      "cross-tenant-recall"
+    ]
   ],
   "promotion_rules": {
-    "activation-candidate_to_protocol-ready": ["ecosystem.surface.json","protocol compatibility declaration","security boundary","validation command"],
-    "protocol-ready_to_active": ["green CI or equivalent signed validation receipt","one reproducible end-to-end task","receipt evidence","failure/denial test","operator documentation"]
+    "activation-candidate_to_protocol-ready": [
+      "ecosystem.surface.json",
+      "protocol compatibility declaration",
+      "security boundary",
+      "validation command"
+    ],
+    "protocol-ready_to_active": [
+      "green CI or equivalent signed validation receipt",
+      "one reproducible end-to-end task",
+      "receipt evidence",
+      "failure/denial test",
+      "operator documentation"
+    ],
+    "kiln_workspace_to_org_canonical": [
+      "nexus.agent-workspace.v1 identity and territory",
+      "nexus.context-pack.v2 provenance when context informed the change",
+      "nexus.promotion-request.v1",
+      "diff digest",
+      "secret scan",
+      "test evidence",
+      "policy decision",
+      "required approval",
+      "execution receipt"
+    ]
   },
   "cross_repository_gates": [
     "corpus manifest hash validates",
@@ -55,6 +370,10 @@
     "AURO family preserves 156K, 250M, 500M, 2B, 4B, 8B, 14B and 100B lanes",
     "POCKET preserves independent cloud, desktop and Edge bodies",
     "consequential execution preserves discover-plan-approve-execute-validate-receipt order",
-    "voice, memory, emergence and deployment claims remain evidence-classified"
+    "voice, memory, emergence and deployment claims remain evidence-classified",
+    "KILN context retrieval is node/workspace scoped and cannot accept arbitrary host filesystem paths",
+    "context packs preserve revision, worktree digest, per-file content hashes, byte/token budgets and omissions",
+    "organization membership does not imply canonical repository promotion authority",
+    "raw context queries and retrieved source are excluded from promotion evidence and audit receipts"
   ]
 }
