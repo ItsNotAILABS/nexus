@@ -1,6 +1,6 @@
 {
   "schema": "nexus.ecosystem-protocol-registry.v1",
-  "version": "2.2.0-context-fabric",
+  "version": "2.3.0-context-sit",
   "authority": "ItsNotAILABS/nexus",
   "principles": [
     "provider-neutral",
@@ -582,6 +582,35 @@
         "policy",
         "evidence",
         "state",
+        "created_at"
+      ]
+    },
+    {
+      "id": "nexus.context-sit.v1",
+      "purpose": "Assemble bounded current code context with durable memory belonging to the same authorized agent workspace while preserving separate provenance and budgets",
+      "required": [
+        "schema",
+        "request_id",
+        "workspace",
+        "query",
+        "code",
+        "memory",
+        "budgets",
+        "provenance",
+        "created_at"
+      ]
+    },
+    {
+      "id": "nexus.context-receipt.v1",
+      "purpose": "Record privacy-bounded signed evidence that repository context was indexed or retrieved without copying raw query text or source excerpts into the audit plane",
+      "required": [
+        "schema",
+        "receipt_id",
+        "operation",
+        "subject",
+        "query_digest",
+        "context_digest",
+        "signature",
         "created_at"
       ]
     }
