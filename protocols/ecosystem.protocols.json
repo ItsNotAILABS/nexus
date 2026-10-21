@@ -1,6 +1,6 @@
 {
   "schema": "nexus.ecosystem-protocol-registry.v1",
-  "version": "2.2.0-context-fabric",
+  "version": "2.3.0-kiln-cognition",
   "authority": "ItsNotAILABS/nexus",
   "principles": [
     "provider-neutral",
@@ -582,6 +582,79 @@
         "policy",
         "evidence",
         "state",
+        "created_at"
+      ]
+    },
+    {
+      "id": "nexus.repo-graph.v1",
+      "purpose": "Represent repository files, symbols and dependency edges as a provenance-bound cognition graph",
+      "required": [
+        "schema",
+        "subject",
+        "revision",
+        "worktree_digest",
+        "nodes",
+        "edges",
+        "digest",
+        "created_at"
+      ]
+    },
+    {
+      "id": "nexus.impact-set.v1",
+      "purpose": "Represent bounded dependency impact from changed paths into affected files, tests, interfaces or services",
+      "required": [
+        "schema",
+        "subject",
+        "changed",
+        "affected",
+        "depth",
+        "digest",
+        "created_at"
+      ]
+    },
+    {
+      "id": "nexus.verified-fact.v1",
+      "purpose": "Persist a repository fact bound to explicit source evidence hashes so freshness can be invalidated automatically",
+      "required": [
+        "schema",
+        "fact_id",
+        "subject",
+        "predicate",
+        "value",
+        "evidence",
+        "confidence",
+        "status",
+        "created_at"
+      ]
+    },
+    {
+      "id": "nexus.token-budget-profile.v1",
+      "purpose": "Describe exact or estimated model context accounting with tokenizer identity, budget, usage, reserve and measurement truth state",
+      "required": [
+        "schema",
+        "profile_id",
+        "model",
+        "tokenizer",
+        "budget",
+        "usage",
+        "exact",
+        "observed_at"
+      ]
+    },
+    {
+      "id": "nexus.porta-decision.v1",
+      "purpose": "Return allow or deny for promotion from an agent workspace into canonical organization infrastructure without performing the mutation itself",
+      "required": [
+        "schema",
+        "decision_id",
+        "actor",
+        "source",
+        "target",
+        "diff_digest",
+        "decision",
+        "reasons",
+        "policy",
+        "evidence",
         "created_at"
       ]
     }
